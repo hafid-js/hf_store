@@ -4,14 +4,15 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
+import 'package:hf_shop/common/widgets/screens/succes_screen.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/utils/constants/helpers/device_helpers.dart';
 import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({super.key});
+class VerifyEmailScreen extends StatelessWidget {
+  const VerifyEmailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwItems),
 
               Text(
-                UTexts.resetPasswordTitle,
+                UTexts.verifyEmailTitle,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               SizedBox(height: USizes.spaceBtwItems),
@@ -49,13 +50,18 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwItems),
 
               Text(
-                UTexts.resetPasswordSubTitle,
+                UTexts.verifyEmailSubTitle,
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: USizes.spaceBtwItems),
 
-              UElevatedButton(onPressed: () {}, child: Text(UTexts.done)),
+              UElevatedButton(onPressed: () => Get.to(() => SuccessScreen(
+                title: UTexts.accountCreatedTitle,
+                subTitle: UTexts.accountCreatedSubTitle,
+                image: UImages.accountCreatedImage,
+                onTap: () {},
+              )), child: Text(UTexts.uContinue)),
 
               SizedBox(
                 width: UDeviceHelper.getScreenWidth(context),

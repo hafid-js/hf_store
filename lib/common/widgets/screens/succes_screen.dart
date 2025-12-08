@@ -1,61 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
-import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/utils/constants/helpers/device_helpers.dart';
-import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({super.key});
+class SuccessScreen extends StatelessWidget {
+  const SuccessScreen({super.key, required this.title, required this.subTitle, required this.image, required this.onTap});
+
+  final String title, subTitle, image;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () => Get.offAll(() => LoginScreen()),
-            icon: Icon(CupertinoIcons.clear),
-          ),
-        ],
-      ),
+      appBar: AppBar(automaticallyImplyLeading: false),
       body: SingleChildScrollView(
         child: Padding(
           padding: UPadding.screenPadding,
-          child: Column(
-            children: [
-              Image.asset(
-                UImages.mailSentImage,
+          child: Column(children: [
+            Image.asset(
+                image,
                 height: UDeviceHelper.getScreenWidth(context) * 0.6,
               ),
               SizedBox(height: USizes.spaceBtwItems),
 
               Text(
-                UTexts.resetPasswordTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
+                title,
+                style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center,
               ),
               SizedBox(height: USizes.spaceBtwItems),
 
               Text(
-                'unknown@gmail.com',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              Text(
-                UTexts.resetPasswordSubTitle,
+                subTitle,
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: USizes.spaceBtwItems),
 
-              UElevatedButton(onPressed: () {}, child: Text(UTexts.done)),
+              UElevatedButton(onPressed: onTap, child: Text(UTexts.uContinue)),
 
               SizedBox(
                 width: UDeviceHelper.getScreenWidth(context),
@@ -64,8 +47,8 @@ class ResetPasswordScreen extends StatelessWidget {
                   child: Text(UTexts.resendEmail),
                 ),
               ),
-            ],
-          ),
+          ],
+        ),
         ),
       ),
     );
