@@ -4,7 +4,7 @@ import 'package:hf_shop/my_app.dart';
 
 void main() {
   // widget flutter binding
-  final widgetBinding = WidgetsFlutterBinding.ensureInitialized();
+  // final widgetBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // flutter native splash
   // FlutterNativeSplash.preserve(widgetsBinding: widgetBinding);

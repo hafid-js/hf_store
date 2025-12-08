@@ -22,9 +22,9 @@ class OnBoardingScreen extends StatelessWidget {
             controller: controller.pageController,
             onPageChanged: (value) => controller.updatePageIndicator,
             children: [
-              OnBoardingPage(animation: UImages.onBoarding1Animation, title: UTexts.onBoardingTitle1, subTitle: UTexts.onBoardingSubtitle1),
-              OnBoardingPage(animation: UImages.onBoarding2Animation, title: UTexts.onBoardingTitle2, subTitle: UTexts.onBoardingSubtitle2),
-              OnBoardingPage(animation: UImages.onBoarding3Animation, title: UTexts.onBoardingTitle3, subTitle: UTexts.onBoardingSubtitle3),
+              OnBoardingPage(animation: UImages.onboarding1Animation, title: UTexts.onBoardingTitle1, subTitle: UTexts.onBoardingSubtitle1),
+              OnBoardingPage(animation: UImages.onboarding2Animation, title: UTexts.onBoardingTitle2, subTitle: UTexts.onBoardingSubtitle2),
+              OnBoardingPage(animation: UImages.onboarding3Animation, title: UTexts.onBoardingTitle3, subTitle: UTexts.onBoardingSubtitle3),
             ],
           ),
           // indicator

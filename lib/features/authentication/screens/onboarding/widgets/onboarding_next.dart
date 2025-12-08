@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:hf_shop/common/button/elevated_butto.dart';
+import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
