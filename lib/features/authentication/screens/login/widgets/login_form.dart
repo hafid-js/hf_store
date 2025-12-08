@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
+import 'package:hf_shop/features/authentication/screens/forget_password/forget_password.dart';
 import 'package:hf_shop/features/authentication/screens/signup/signup.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
@@ -41,7 +42,7 @@ class ULoginForm extends StatelessWidget {
                 Text(UTexts.rememberMe),
               ],
             ),
-            TextButton(onPressed: () {}, child: Text(UTexts.forgetPassword)),
+            TextButton(onPressed: () => Get.to(() => ForgetPasswordScreen()), child: Text(UTexts.forgetPassword)),
           ],
         ),
 
