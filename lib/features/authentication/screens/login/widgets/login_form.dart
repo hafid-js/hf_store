@@ -4,6 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/features/authentication/screens/forget_password/forget_password.dart';
 import 'package:hf_shop/features/authentication/screens/signup/signup.dart';
+import 'package:hf_shop/navigation_menu.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -48,7 +49,7 @@ class ULoginForm extends StatelessWidget {
 
         SizedBox(height: USizes.spaceBtwSections),
 
-        UElevatedButton(onPressed: () {}, child: Text(UTexts.signIn)),
+        UElevatedButton(onPressed: () => Get.to(() => NavigationMenu()), child: Text(UTexts.signIn)),
 
         SizedBox(height: USizes.spaceBtwItems / 2),
 
