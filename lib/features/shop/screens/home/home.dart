@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
+import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:hf_shop/common/widgets/textfields/search_bar.dart';
+import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/primary_header_container.dart';
@@ -14,7 +16,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         children: [
           Stack(
             children: [
@@ -41,18 +44,37 @@ class HomeScreen extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.all(USizes.defaultSpace),
-            child: UPromoSlider(
-              banners: [
-                UImages.homeBanner1,
-                UImages.homeBanner2,
-                UImages.homeBanner3,
-                UImages.homeBanner4,
-                UImages.homeBanner5,
+            child: Column(
+              children: [
+                UPromoSlider(
+                  banners: [
+                    UImages.homeBanner1,
+                    UImages.homeBanner2,
+                    UImages.homeBanner3,
+                    UImages.homeBanner4,
+                    UImages.homeBanner5,
+                  ],
+                ),
+
+                SizedBox(height: USizes.spaceBtwSections),
+
+                // section heading
+                USectionHeading(title: 'Popular Products', onPressed: () {},),
+                SizedBox(height: USizes.spaceBtwItems),
+
+                // grid view of product cards
+                UGridLayout(
+                  itemCount: 6,
+                  itemBuilder: (context, index) {
+                    return UProductCardVertical();
+                  },
+                )
               ],
-            )
+            ),
           ),
         ],
       ),
+      )
     );
   }
 }

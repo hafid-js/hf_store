@@ -39,10 +39,13 @@ class URoundedImage extends StatelessWidget {
         decoration: BoxDecoration(
           border: border,
           color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: ClipRRect(
           borderRadius: applyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          image: DecorationImage(
+          child: Image(
             image: isNetworkImage
                 ? NetworkImage(imageUrl)
                 : AssetImage(imageUrl),
