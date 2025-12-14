@@ -5,7 +5,9 @@ import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/device_helpers.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {
-  const UPrimaryHeaderContainer({super.key});
+  const UPrimaryHeaderContainer({super.key, required this.child});
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,11 @@ class UPrimaryHeaderContainer extends StatelessWidget {
                 backgroundColor: UColors.white.withValues(alpha: 0.1),
               ),
             ),
+
+            child,
           ],
         ),
       ),
     );
   }
 }
-
