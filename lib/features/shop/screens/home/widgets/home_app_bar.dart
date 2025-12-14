@@ -7,10 +7,7 @@ import 'package:hf_shop/utils/constants/texts.dart';
 class UHomeAppBar extends StatelessWidget {
   const UHomeAppBar({
     super.key,
-    required this.dark,
   });
-
-  final bool dark;
 
   @override
   Widget build(BuildContext context) {

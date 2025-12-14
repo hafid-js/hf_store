@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hf_shop/common/widgets/textfields/search_bar.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_app_bar.dart';
+import 'package:hf_shop/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/primary_header_container.dart';
-import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = UHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -19,7 +18,16 @@ class HomeScreen extends StatelessWidget {
 
           // primary header container
           UPrimaryHeaderContainer(
-            child: Column(children: [UHomeAppBar(dark: dark)]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UHomeAppBar(),
+                SizedBox(height: USizes.spaceBtwSections),
+
+                // home categories
+                UHomeCategories()
+              ],
+            ),
           ),
 
           USearchBar(),
