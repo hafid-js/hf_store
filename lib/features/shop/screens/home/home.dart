@@ -21,11 +21,12 @@ class HomeScreen extends StatelessWidget {
         children: [
           Stack(
             children: [
-              // total height + 20
-              SizedBox(height: USizes.homePrimaryHeaderHeight + 20),
+              // total height + 10
+              SizedBox(height: USizes.homePrimaryHeaderHeight + 10),
 
               // primary header container
               UPrimaryHeaderContainer(
+                height: USizes.homePrimaryHeaderHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

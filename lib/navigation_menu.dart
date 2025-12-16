@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/features/authentication/screens/signup/signup.dart';
 import 'package:hf_shop/features/shop/screens/home/home.dart';
+import 'package:hf_shop/features/shop/screens/store/store.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
@@ -42,7 +43,7 @@ class NavigationController extends GetxController {
 
   List<Widget> screens = [
     HomeScreen(),
-    Container(),
+    StoreScreen(),
     LoginScreen(), SignupScreen()
   ];
 }

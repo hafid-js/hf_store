@@ -3,6 +3,7 @@ import 'package:hf_shop/common/style/shadow.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
+import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
 import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
@@ -84,22 +85,7 @@ class UProductCardVertical extends StatelessWidget {
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
                   // product brand
-                  Row(
-                    children: [
-                      Text(
-                        'Bata',
-                        style: Theme.of(context).textTheme.labelMedium,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(width: USizes.xs),
-                      Icon(
-                        Iconsax.verify5,
-                        color: UColors.primary,
-                        size: USizes.iconXs,
-                      ),
-                    ],
-                  ),
+                  UBrandTitleWithVerifyIcon(title: 'Bata'),
 
                   // product prices & add button
                 ],

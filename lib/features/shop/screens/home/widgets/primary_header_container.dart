@@ -5,16 +5,21 @@ import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {
-  const UPrimaryHeaderContainer({super.key, required this.child});
+  const UPrimaryHeaderContainer({
+    super.key,
+    required this.child,
+    required this.height,
+  });
 
   final Widget child;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return ClipPath(
       clipper: UCustomRoundedEdges(),
       child: Container(
-        height: USizes.homePrimaryHeaderHeight,
+        height: height,
         color: UColors.primary,
         child: Stack(
           children: [
