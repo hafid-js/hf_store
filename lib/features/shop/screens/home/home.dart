@@ -5,7 +5,7 @@ import 'package:hf_shop/common/widgets/textfields/search_bar.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:hf_shop/features/shop/screens/home/widgets/primary_header_container.dart';
+import 'package:hf_shop/common/widgets/custom_shapes/primary_header_container.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';

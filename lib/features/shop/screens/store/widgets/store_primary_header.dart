@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/products/cart/cart_counter_icon.dart';
 import 'package:hf_shop/common/widgets/textfields/search_bar.dart';
-import 'package:hf_shop/features/shop/screens/home/widgets/primary_header_container.dart';
+import 'package:hf_shop/common/widgets/custom_shapes/primary_header_container.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
