@@ -27,7 +27,7 @@ class UPolicyPrivacyCheckbox extends StatelessWidget {
               ),
               TextSpan(text: '${UTexts.and} '),
               TextSpan(
-                text: '${UTexts.termsOfUse}',
+                text: UTexts.termsOfUse,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: dark ? UColors.white : UColors.primary,
                   decoration: TextDecoration.underline,

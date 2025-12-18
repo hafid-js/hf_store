@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/features/authentication/screens/forget_password/reset_password.dart';
