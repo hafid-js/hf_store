@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/images/circular_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
@@ -16,9 +15,7 @@ class UProductMetaData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: UPadding.screenPadding,
-      child: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -88,8 +85,7 @@ class UProductMetaData extends StatelessWidget {
               UBrandTitleWithVerifyIcon(title: 'Apple'),
             ],
           ),
-        ],
-      ),
+        ]
     );
   }
 }

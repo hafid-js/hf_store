@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hf_shop/common/style/padding.dart';
+import 'package:hf_shop/common/widgets/button/elevated_button.dart';
+import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
+import 'package:hf_shop/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_thumbnail_and_slider.dart';
+import 'package:hf_shop/utils/constants/sizes.dart';
+import 'package:readmore/readmore.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -12,11 +19,52 @@ class ProductDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             UProductThumbnailAndSlider(),
+            Padding(
+              padding: UPadding.screenPadding,
+              child: Column(
+                children: [
+                  UProductMetaData(),
+                  SizedBox(height: USizes.spaceBtwSections),
 
-            UProductMetaData(),
+                  UProductAttributes(),
+
+                  SizedBox(height: USizes.spaceBtwSections),
+
+                  UElevatedButton(onPressed: () {}, child: Text('Checkout')),
+                  SizedBox(height: USizes.spaceBtwSections),
+
+                  USectionHeading(
+                    title: 'Description',
+                    showActionButton: false,
+                  ),
+                  SizedBox(height: USizes.spaceBtwItems),
+
+
+                  ReadMoreText(
+                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                    trimLines: 2,
+                    trimMode: TrimMode.Line,
+                    trimCollapsedText: 'Show More',
+                    trimExpandedText: ' Less',
+                    moreStyle: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    lessStyle: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+
+                  SizedBox(height: USizes.spaceBtwSections),
+                ],
+              ),
+            ),
           ],
         ),
       ),
+
+      bottomNavigationBar: UBottomAddToCart(),
     );
   }
 }
