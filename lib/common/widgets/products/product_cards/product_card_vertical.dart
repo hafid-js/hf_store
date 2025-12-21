@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/style/shadow.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
@@ -6,6 +8,7 @@ import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
 import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
+import 'package:hf_shop/features/shop/screens/product_details/product_details.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/images.dart';
@@ -20,7 +23,7 @@ class UProductCardVertical extends StatelessWidget {
     final dark = UHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -82,7 +85,7 @@ class UProductCardVertical extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // product title
-                  UProductTitle(title: 'Blue Bata Shoes', smallSize: true),
+                  UProductTitleText(title: 'Blue Bata Shoes', smallSize: true),
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
                   // product brand
