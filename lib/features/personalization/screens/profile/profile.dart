@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/personalization/screens/address/address.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/settings_menu_tile.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/user_profile_tile.dart';
@@ -30,16 +33,19 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   SettingsMenuTile(
+                    onTap: () => Get.to(() => AddressScreen()),
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery addresses',
                   ),
                   SettingsMenuTile(
+                    onTap: () {},
                     icon: Iconsax.shopping_cart,
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
                   ),
                   SettingsMenuTile(
+                     onTap: () {},
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',

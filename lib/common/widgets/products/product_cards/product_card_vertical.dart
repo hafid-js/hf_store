@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/style/shadow.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
