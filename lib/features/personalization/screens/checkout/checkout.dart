@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
+import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
+import 'package:hf_shop/common/widgets/screens/succes_screen.dart';
 import 'package:hf_shop/common/widgets/textfields/promo_code.dart';
 import 'package:hf_shop/features/personalization/screens/cart/widgets/cart_items.dart';
 import 'package:hf_shop/features/personalization/screens/checkout/widgets/billing_address_section.dart';
 import 'package:hf_shop/features/personalization/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:hf_shop/features/personalization/screens/checkout/widgets/billing_payment_section.dart';
+import 'package:hf_shop/navigation_menu.dart';
+import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -52,6 +58,12 @@ class CheckoutScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(USizes.defaultSpace),
+        child: UElevatedButton(
+          onPressed: () => Get.to(() => SuccessScreen(title: 'Payment Success', subTitle: 'Your item will be shipped soon!', image: UImages.successfulPaymentIcon, onTap: () => Get.offAll(() => NavigationMenu()),)),
+          child: Text('Checkout \$8.249'),)
+        ),
     );
   }
 }
