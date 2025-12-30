@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
+import 'package:hf_shop/features/personalization/screens/cart/cart.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
@@ -17,7 +20,7 @@ class UCartCounterIcon extends StatelessWidget {
     
         // bag icon / bag icon
         IconButton(
-          onPressed: () {},
+          onPressed: () => Get.to(() => CartScreen()),
           icon: Icon(Iconsax.shopping_bag),
           color: UColors.white,
         ),
