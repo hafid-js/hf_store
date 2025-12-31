@@ -12,7 +12,7 @@ class UserProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Text('Unknown Pro', style: Theme.of(context).textTheme.headlineSmall,),
+      title: Text('Hafid Tech', style: Theme.of(context).textTheme.headlineSmall,),
       subtitle: Text('unknown@hafidtech.com', style: Theme.of(context).textTheme.bodyMedium),
       trailing: IconButton(onPressed: () => Get.to(() => EditProfileScreen()), icon: Icon(Iconsax.edit)),
     );

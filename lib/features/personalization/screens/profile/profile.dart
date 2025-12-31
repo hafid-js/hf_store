@@ -6,6 +6,7 @@ import 'package:hf_shop/features/personalization/screens/address/address.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/settings_menu_tile.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/user_profile_tile.dart';
+import 'package:hf_shop/features/shop/screens/order/order.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -45,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     subtitle: 'Add, remove products and move to checkout',
                   ),
                   SettingsMenuTile(
-                     onTap: () {},
+                     onTap: () => Get.to(() => OrderScreen()),
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',
