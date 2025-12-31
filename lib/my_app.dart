@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      theme: UAppTheme.lightTheme,
+      theme: UAppTheme.darkTheme,
       darkTheme: UAppTheme.darkTheme,
       home: OnBoardingScreen(),
     );
