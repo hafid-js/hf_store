@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/brands/brand_card.dart';

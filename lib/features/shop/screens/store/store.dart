@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/appbar/tabbar.dart';
 import 'package:hf_shop/common/widgets/brands/brand_card.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';

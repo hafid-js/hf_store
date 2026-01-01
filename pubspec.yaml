@@ -26,6 +26,7 @@ dependencies:
   firebase_auth: ^6.1.3
   cloud_firestore: ^6.1.1
   google_sign_in: ^7.2.0
+  get_storage: ^2.1.1
 
 # --- END PACKAGES --- #
 

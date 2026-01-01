@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/features/personalization/screens/address/address.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/profile_primary_header.dart';
