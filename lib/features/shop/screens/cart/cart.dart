@@ -4,8 +4,8 @@ import 'package:get/instance_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
-import 'package:hf_shop/features/personalization/screens/cart/widgets/cart_items.dart';
-import 'package:hf_shop/features/personalization/screens/checkout/checkout.dart';
+import 'package:hf_shop/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:hf_shop/features/shop/screens/checkout/checkout.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class CartScreen extends StatelessWidget {

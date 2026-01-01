@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
 import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:hf_shop/common/widgets/textfields/search_bar.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/shop/screens/all_products/all_products.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/primary_header_container.dart';
@@ -60,8 +62,8 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: USizes.spaceBtwSections),
 
                 // section heading
-                USectionHeading(title: 'Popular Products', onPressed: () {},),
-                SizedBox(height: USizes.spaceBtwItems),
+                USectionHeading(title: 'Popular Products', onPressed: () => Get.to(() => AllProductsScreen()),),
+                const SizedBox(height: USizes.spaceBtwItems),
 
                 // grid view of product cards
                 UGridLayout(
