@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "192178442232",
+    "project_id": "hafidtech-shopapp-ec812",
+    "storage_bucket": "hafidtech-shopapp-ec812.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192178442232:android:de7a12912cf384f414900d",
+        "android_client_info": {
+          "package_name": "com.example.hf_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192178442232-shjculovo4bmh1bb9agf6g7m4m2jhpim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlhSywWW3MOFpi6rLpWPqqPZLhCNnwbjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192178442232-shjculovo4bmh1bb9agf6g7m4m2jhpim.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "192178442232-nqfj94usbi763m9juetuveu12rj9dops.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hfShop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
