@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/data/repositories/authentication_repository.dart';
 import 'package:hf_shop/features/personalization/screens/address/address.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:hf_shop/features/personalization/screens/profile/widgets/settings_menu_tile.dart';
@@ -56,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: AuthenticationRepository.instance.logout,
                       child: Text('Logout'),
                     ),
                   ),

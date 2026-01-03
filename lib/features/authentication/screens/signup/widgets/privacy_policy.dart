@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
+import 'package:hf_shop/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
@@ -9,9 +11,10 @@ class UPolicyPrivacyCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
+    final controller = SignupController.instance;
     return Row(
       children: [
-        Checkbox(value: true, onChanged: (value) {}),
+        Obx(() => Checkbox(value: controller.privacyPolicy.value, onChanged: (value) => controller.privacyPolicy.value = !controller.privacyPolicy.value),),
         RichText(
           text: TextSpan(
             style: Theme.of(context).textTheme.bodyMedium,

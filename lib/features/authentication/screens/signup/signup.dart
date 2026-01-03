@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/social_buttons.dart';
 import 'package:hf_shop/common/widgets/login_signup/form_divider.dart';
+import 'package:hf_shop/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:hf_shop/features/authentication/screens/signup/widgets/signup_form.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
@@ -11,6 +14,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SignupController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
