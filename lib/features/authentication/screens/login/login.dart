@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/social_buttons.dart';
 import 'package:hf_shop/common/widgets/login_signup/form_divider.dart';
+import 'package:hf_shop/features/authentication/controllers/login/login_controller.dart';
 import 'package:hf_shop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:hf_shop/features/authentication/screens/login/widgets/login_header.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
@@ -12,6 +15,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

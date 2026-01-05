@@ -8,6 +8,7 @@ import '../constants/colors.dart';
 class USnackBarHelpers {
 
   static customToast({required message}){
+     if (Get.context == null) return;
     ScaffoldMessenger.of(Get.context!).showSnackBar(
         SnackBar(
           elevation: 0,
@@ -28,6 +29,10 @@ class USnackBarHelpers {
 
   /// Warning Orange Snack bar
   static warningSnackBar({required title, message = ''}) {
+     if (Get.context == null) return;
+      if (Get.isSnackbarOpen) {
+    Get.closeCurrentSnackbar();
+  }
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,

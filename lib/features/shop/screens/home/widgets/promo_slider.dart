@@ -21,7 +21,7 @@ class UPromoSlider extends StatelessWidget {
       items: 
       banners.map((banner) => URoundedImage(imageUrl: banner)).toList(),
       options: CarouselOptions(viewportFraction: 1.0, onPageChanged: (index, reason) => controller.onPageChanged(index)),
-      carouselController: controller.CarouselController,
+      carouselController: controller.carouselController
     ),
     
     SizedBox(height: USizes.spaceBtwItems,),

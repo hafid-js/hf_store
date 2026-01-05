@@ -58,7 +58,7 @@ class UserModel{
           email: data['email'] ?? '',
           phoneNumber: data['phoneNumber'] ?? '',
           profilePicture: data['profilePicture'] ?? '',
-        publicId: data['publicId']
+        publicId: data['publicId'] ?? ''
       );
     }else{
       return UserModel.empty();

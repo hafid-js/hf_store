@@ -5,7 +5,7 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.find();
 
   // variables
-  final CarouselController = CarouselSliderController();
+  final CarouselSliderController carouselController = CarouselSliderController();
   RxInt currentIndex = 0.obs;
 
   // on carousel page changed

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
+import 'package:hf_shop/features/authentication/controllers/login/login_controller.dart';
 import 'package:hf_shop/features/authentication/screens/forget_password/forget_password.dart';
 import 'package:hf_shop/features/authentication/screens/signup/signup.dart';
-import 'package:hf_shop/navigation_menu.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
+import 'package:hf_shop/utils/validators/validation.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ULoginForm extends StatelessWidget {
@@ -14,50 +15,82 @@ class ULoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Iconsax.direct_right),
-            labelText: UTexts.email,
-          ),
-        ),
-        SizedBox(height: USizes.spaceBtwSections),
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Iconsax.password_check),
-            labelText: UTexts.password,
-            suffixIcon: Icon(Iconsax.eye),
-          ),
-        ),
-
-        SizedBox(height: USizes.spaceBtwInputFields / 2),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Checkbox(value: true, onChanged: (value) {}),
-                Text(UTexts.rememberMe),
-              ],
+    final controller = LoginController.instance;
+    return Form(
+      key: controller.loginFormKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            controller: controller.email,
+            validator: (value) => UValidator.validateEmail(value),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Iconsax.direct_right),
+              labelText: UTexts.email,
             ),
-            TextButton(onPressed: () => Get.to(() => ForgetPasswordScreen()), child: Text(UTexts.forgetPassword)),
-          ],
-        ),
+          ),
+          SizedBox(height: USizes.spaceBtwSections),
+          Obx(
+            () => TextFormField(
+              controller: controller.password,
+              validator: (value) => UValidator.validatePassword(value),
+              obscureText: controller.isPasswordVisible.value,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Iconsax.password_check),
+                labelText: UTexts.password,
+                suffixIcon: IconButton(
+                  onPressed: () => controller.isPasswordVisible.toggle(),
+                  icon: Icon(
+                    controller.isPasswordVisible.value
+                        ? Iconsax.eye_slash
+                        : Iconsax.eye,
+                  ),
+                ),
+              ),
+            ),
+          ),
 
-        SizedBox(height: USizes.spaceBtwSections),
+          SizedBox(height: USizes.spaceBtwInputFields / 2),
 
-        UElevatedButton(onPressed: () => Get.to(() => NavigationMenu()), child: Text(UTexts.signIn)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Obx(
+                () => Row(
+                  children: [
+                    Checkbox(
+                      value: controller.rememberMe.value,
+                      onChanged: (value) => controller.rememberMe.toggle(),
+                    ),
+                    Text(UTexts.rememberMe),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () => Get.to(() => ForgetPasswordScreen()),
+                child: Text(UTexts.forgetPassword),
+              ),
+            ],
+          ),
 
-        SizedBox(height: USizes.spaceBtwItems / 2),
+          SizedBox(height: USizes.spaceBtwSections),
 
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(onPressed: () => Get.to(() => SignupScreen()), child: Text(UTexts.createAccount)),
-        )
-      ],
+          UElevatedButton(
+            onPressed: controller.loginWithEmailAndPassword,
+            child: Text(UTexts.signIn),
+          ),
+
+          SizedBox(height: USizes.spaceBtwItems / 2),
+
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: () => Get.to(() => SignupScreen()),
+              child: Text(UTexts.createAccount),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

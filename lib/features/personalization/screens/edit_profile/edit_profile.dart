@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/personalization/controllers/user_controller.dart';
 import 'package:hf_shop/features/personalization/screens/edit_profile/widgets/user_profile_with_edit_icon.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,6 +12,7 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
@@ -34,8 +36,8 @@ class EditProfileScreen extends StatelessWidget {
                 title: 'Account Settings',
                 showActionButton: false,
               ),
-              UserDetailRow(title: 'Name', value: 'Hafid Tech', onTap: () {}),
-              UserDetailRow(title: 'Username', value: 'hafidtech12', onTap: () {}),
+              UserDetailRow(title: 'Name', value: controller.user.value.fullName, onTap: () {}),
+              UserDetailRow(title: 'Username', value: controller.user.value.username, onTap: () {}),
               SizedBox(height: USizes.spaceBtwItems),
 
               Divider(),
@@ -49,17 +51,17 @@ class EditProfileScreen extends StatelessWidget {
 
               UserDetailRow(
                 title: 'User ID',
-                value: '46899836544',
+                value: controller.user.value.id,
                 onTap: () {},
               ),
               UserDetailRow(
                 title: 'Email',
-                value: 'user@hafidtech.com',
+                value: controller.user.value.email,
                 onTap: () {},
               ),
               UserDetailRow(
                 title: 'Phone Number',
-                value: '+6287745632266',
+                value: controller.user.value.phoneNumber,
                 onTap: () {},
               ),
               UserDetailRow(title: 'Gender', value: 'Male', onTap: () {}),
