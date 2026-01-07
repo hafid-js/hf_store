@@ -5,6 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hf_shop/data/repositories/user/user_repository.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +13,7 @@ import 'package:hf_shop/features/authentication/screens/signup/verify_email.dart
 import 'package:hf_shop/navigation_menu.dart';
 import 'package:hf_shop/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:hf_shop/utils/exceptions/firebase_exceptions.dart';
+import 'package:hf_shop/utils/exceptions/format_exceptions.dart';
 import 'package:hf_shop/utils/exceptions/platform_exceptions.dart';
 
 class AuthenticationRepository extends GetxController {
@@ -54,6 +56,8 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -75,6 +79,8 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -86,20 +92,24 @@ class AuthenticationRepository extends GetxController {
     try {
       final GoogleSignInAccount? googleAccount = await GoogleSignIn().signIn();
 
-      final GoogleSignInAuthentication? googleAuth = await googleAccount?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleAccount?.authentication;
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleAuth?.idToken,
-        accessToken:  googleAuth?.accessToken
-
+        accessToken: googleAuth?.accessToken,
       );
 
-      UserCredential userCredential =  await _auth.signInWithCredential(credential);
+      UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -114,6 +124,8 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -128,6 +140,28 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+    Future<void> reAuthenticationUserWithEmailAndPassword(String email, String password) async {
+    try {
+
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+
+      await currentUser!.reauthenticateWithCredential(credential);
+    
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -143,6 +177,25 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {

@@ -7,7 +7,6 @@ import 'package:hf_shop/features/personalization/controllers/user_controller.dar
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
-import 'package:hf_shop/utils/constants/texts.dart';
 
 class UHomeAppBar extends StatelessWidget {
   const UHomeAppBar({

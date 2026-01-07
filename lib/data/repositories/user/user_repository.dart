@@ -7,6 +7,7 @@ import 'package:hf_shop/features/authentication/models/user_model.dart';
 import 'package:hf_shop/utils/constants/keys.dart';
 import 'package:hf_shop/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:hf_shop/utils/exceptions/firebase_exceptions.dart';
+import 'package:hf_shop/utils/exceptions/format_exceptions.dart';
 import 'package:hf_shop/utils/exceptions/platform_exceptions.dart';
 
 class UserRepository extends GetxController {
@@ -21,6 +22,8 @@ class UserRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
@@ -28,25 +31,67 @@ class UserRepository extends GetxController {
     }
   }
 
-
   Future<UserModel> fetchUserDetails() async {
     try {
-     final documentSnapshot = await _db.collection(UKeys.userCollection).doc(AuthenticationRepository.instance.currentUser!.uid).get();
+      final documentSnapshot = await _db
+          .collection(UKeys.userCollection)
+          .doc(AuthenticationRepository.instance.currentUser!.uid)
+          .get();
 
-     if(documentSnapshot.exists) {
-      UserModel user = UserModel.fromSnapshot(documentSnapshot);
-      return user;
-     }
+      if (documentSnapshot.exists) {
+        UserModel user = UserModel.fromSnapshot(documentSnapshot);
+        return user;
+      }
 
-     return UserModel.empty();
+      return UserModel.empty();
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again!';
     }
   }
+
+  Future<void> updateSingleField(Map<String, dynamic> map) async {
+    try {
+      await _db
+          .collection(UKeys.userCollection)
+          .doc(AuthenticationRepository.instance.currentUser!.uid)
+          .update(map);
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      _db.collection(UKeys.userCollection).doc(userId).delete();
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+
+
 }
