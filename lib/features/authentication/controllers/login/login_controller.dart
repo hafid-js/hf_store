@@ -50,10 +50,12 @@ class LoginController extends GetxController {
         localStorage.write('Remember_password', password.text.trim());
       }
 
-      await AuthenticationRepository.instance.loginWithEmailAndPAssword(
-        email.text.trim(),
-        password.text.trim(),
-      );
+      final userCredential = await AuthenticationRepository.instance
+          .loginWithEmailAndPAssword(email.text.trim(), password.text.trim());
+
+      await _userController.saveUserRecord(userCredential);
+
+      AuthenticationRepository.instance.screenRedirect();
 
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {

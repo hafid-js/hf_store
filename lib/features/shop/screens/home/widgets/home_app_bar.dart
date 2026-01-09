@@ -9,44 +9,40 @@ import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class UHomeAppBar extends StatelessWidget {
-  const UHomeAppBar({
-    super.key,
-  });
+  const UHomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-final controller = UserController.instance;
+    final controller = UserController.instance;
+
     return UAppBar(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // title
-          Text(
-            UHelperFunctions.getGreetingMessage(),
-            style: Theme.of(
-              context,
-            ).textTheme.labelMedium!.apply(color: UColors.grey),
-          ),
-          SizedBox(height: USizes.spaceBtwItems /3),
-    
-          // subtitle
-          Obx(() {
-            if(controller.profileLoading.value) {
-              return UShimmerEffect(width: 80, height: 15);
-            }
-            return Text(
-            controller.user.value.fullName,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall!.apply(color: UColors.white),
-          );
-          }),
-          
-        ],
-      ),
-      actions: [
-        UCartCounterIcon(),
-      ],
+      title: Obx(() {
+        final isLoading = controller.profileLoading.value;
+        final user = controller.user.value;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              UHelperFunctions.getGreetingMessage(),
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium!.apply(color: UColors.grey),
+            ),
+
+            SizedBox(height: USizes.spaceBtwItems / 3),
+            isLoading
+                ? const UShimmerEffect(width: 80, height: 15)
+                : Text(
+                    user.fullName,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.headlineSmall!.apply(color: UColors.white),
+                  ),
+          ],
+        );
+      }),
+      actions: const [UCartCounterIcon()],
     );
   }
 }

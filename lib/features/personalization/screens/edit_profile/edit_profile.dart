@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
@@ -16,6 +17,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
+
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
@@ -24,60 +26,69 @@ class EditProfileScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: UPadding.screenPadding,
-          child: Column(
-            children: [
-              UserProfileWithEditIcon(),
-              SizedBox(height: USizes.spaceBtwSections),
+      body: Obx(() {
+        final user = controller.user.value;
 
-              Divider(),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              USectionHeading(
-                title: 'Account Settings',
-                showActionButton: false,
-              ),
-              UserDetailRow(title: 'Name', value: controller.user.value.fullName, onTap: () => Get.to(() => ChangeNameScreen())),
-              UserDetailRow(title: 'Username', value: controller.user.value.username, onTap: () {}),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              Divider(),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              USectionHeading(
-                title: 'Profile Settings',
-                showActionButton: false,
-              ),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              UserDetailRow(
-                title: 'User ID',
-                value: controller.user.value.id,
-                onTap: () {},
-              ),
-              UserDetailRow(
-                title: 'Email',
-                value: controller.user.value.email,
-                onTap: () {},
-              ),
-              UserDetailRow(
-                title: 'Phone Number',
-                value: controller.user.value.phoneNumber,
-                onTap: () {},
-              ),
-              UserDetailRow(title: 'Gender', value: 'Male', onTap: () {}),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              Divider(),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              TextButton(onPressed: controller.deleteAccountWarningPopup, child: Text('Close Account', style: TextStyle(color: Colors.red),)),
-            ],
+        return SingleChildScrollView(
+          child: Padding(
+            padding: UPadding.screenPadding,
+            child: Column(
+              children: [
+                UserProfileWithEditIcon(),
+                SizedBox(height: USizes.spaceBtwSections),
+                Divider(),
+                SizedBox(height: USizes.spaceBtwItems),
+                USectionHeading(
+                  title: 'Account Settings',
+                  showActionButton: false,
+                ),
+                UserDetailRow(
+                  title: 'Name',
+                  value: user.fullName,
+                  onTap: () => Get.to(() => ChangeNameScreen()),
+                ),
+                UserDetailRow(
+                  title: 'Username',
+                  value: user.username,
+                  onTap: () {},
+                ),
+                SizedBox(height: USizes.spaceBtwItems),
+                Divider(),
+                SizedBox(height: USizes.spaceBtwItems),
+                USectionHeading(
+                  title: 'Profile Settings',
+                  showActionButton: false,
+                ),
+                UserDetailRow(
+                  title: 'User ID',
+                  value: user.id,
+                  onTap: () {},
+                ),
+                UserDetailRow(
+                  title: 'Email',
+                  value: user.email,
+                  onTap: () {},
+                ),
+                UserDetailRow(
+                  title: 'Phone Number',
+                  value: user.phoneNumber,
+                  onTap: () {},
+                ),
+                SizedBox(height: USizes.spaceBtwItems),
+                Divider(),
+                SizedBox(height: USizes.spaceBtwItems),
+                TextButton(
+                  onPressed: controller.deleteAccountWarningPopup,
+                  child: Text(
+                    'Close Account',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

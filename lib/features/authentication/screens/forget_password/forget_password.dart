@@ -4,7 +4,6 @@ import 'package:get/route_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/features/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:hf_shop/features/authentication/screens/forget_password/reset_password.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
 import 'package:hf_shop/utils/validators/validation.dart';
