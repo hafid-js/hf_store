@@ -5,7 +5,9 @@ import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hf_shop/data/repositories/category/category_repository.dart';
 import 'package:hf_shop/data/repositories/user/user_repository.dart';
+import 'package:hf_shop/dummy.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,6 +31,8 @@ class AuthenticationRepository extends GetxController {
     FlutterNativeSplash.remove();
 
     screenRedirect();
+
+    Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
   }
 
   void screenRedirect() {
@@ -196,7 +200,7 @@ class AuthenticationRepository extends GetxController {
         UserRepository.instance.deleteProfilePicture(publicId);
       }
       await _auth.currentUser?.delete();
-      
+
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
