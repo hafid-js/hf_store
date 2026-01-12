@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/circular_container.dart';
+import 'package:hf_shop/common/widgets/images/circular_image.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
@@ -23,16 +24,9 @@ class UVerticalImageText extends StatelessWidget {
       child: Column(
       children: [
         // circular image
-        UCircularContainer(
-          height: 56,
-          width: 56,
-          backgroundColor: backgroundColor ?? (dark ? UColors.dark : UColors.light),
-          padding: EdgeInsets.all(USizes.sm),
-          child: Image(
-            image: AssetImage(image),
-            fit: BoxFit.cover,
-          ),
-        ),
+
+
+        UCircularImage(image: image, height: 56, width: 56, isNetworkImage: true,),
         SizedBox(height: USizes.spaceBtwItems / 2),
         SizedBox(
           width: 55,

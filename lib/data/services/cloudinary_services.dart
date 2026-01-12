@@ -12,8 +12,6 @@ class CloudinaryServices extends GetxController {
 
   final _dio = dio.Dio();
 
-  final _cloudinaryServices = Get.put(CloudinaryServices());
-
   Future<dio.Response> uploadImage(File image, String folderName) async {
     try {
       String api = UApiUrls.uploadApi(UKeys.cloudName);
