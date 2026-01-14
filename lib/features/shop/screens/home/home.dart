@@ -9,7 +9,6 @@ import 'package:hf_shop/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/primary_header_container.dart';
 import 'package:hf_shop/features/shop/screens/home/widgets/promo_slider.dart';
-import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -50,13 +49,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 UPromoSlider(
-                  banners: [
-                    UImages.homeBanner1,
-                    UImages.homeBanner2,
-                    UImages.homeBanner3,
-                    UImages.homeBanner4,
-                    UImages.homeBanner5,
-                  ],
                 ),
 
                 SizedBox(height: USizes.spaceBtwSections),

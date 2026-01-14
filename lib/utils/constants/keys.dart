@@ -2,6 +2,7 @@ class UKeys {
   UKeys._();
 
   static const String userCollection = 'Users';
+  static const String bannerCollection = 'Banners';
   static const String categoryCollection = 'Categories';
 
   static const String rememberEmail = 'rememberEmail';
@@ -14,4 +15,5 @@ class UKeys {
   static const String apiSecret = 'FVidICApeIP9fGLhOyo4Q_L8FTk';
 
   static const String categoryFolder = 'Category Pictures';
+  static const String bannerFolder = 'Banners Images';
 }
