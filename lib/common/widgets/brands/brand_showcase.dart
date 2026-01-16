@@ -3,6 +3,7 @@ import 'package:hf_shop/common/widgets/brands/brand_card.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
+import 'package:hf_shop/features/shop/models/brand_model.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class UBrandShowcase extends StatelessWidget {
@@ -26,6 +27,7 @@ class UBrandShowcase extends StatelessWidget {
         children: [
           UBrandCard(
             showBorder: false,
+            brand: BrandModel.empty(),
           ),
     
           Row(

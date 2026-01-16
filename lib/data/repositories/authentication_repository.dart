@@ -5,7 +5,9 @@ import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hf_shop/data/repositories/brand/brand_repository.dart';
 import 'package:hf_shop/data/repositories/user/user_repository.dart';
+import 'package:hf_shop/dummy_data.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
 import 'package:hf_shop/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +34,7 @@ class AuthenticationRepository extends GetxController {
 
     // Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
     // Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
+    // Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
   }
 
   void screenRedirect() {
@@ -153,13 +156,17 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-    Future<void> reAuthenticationUserWithEmailAndPassword(String email, String password) async {
+  Future<void> reAuthenticationUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
-
-      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      AuthCredential credential = EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
 
       await currentUser!.reauthenticateWithCredential(credential);
-    
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -195,11 +202,10 @@ class AuthenticationRepository extends GetxController {
       await UserRepository.instance.removeUserRecord(currentUser!.uid);
 
       String publicId = UserController.instance.user.value.publicId;
-      if(publicId.isNotEmpty) {
+      if (publicId.isNotEmpty) {
         UserRepository.instance.deleteProfilePicture(publicId);
       }
       await _auth.currentUser?.delete();
-
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

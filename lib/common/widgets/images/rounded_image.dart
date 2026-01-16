@@ -45,13 +45,37 @@ class URoundedImage extends StatelessWidget {
           borderRadius: applyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl),
-            fit: fit,
-          ),
+          child: _buildImage(),
         ),
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    if (imageUrl.isEmpty) {
+      return const Icon(
+        Icons.image_not_supported,
+        color: Colors.grey,
+      );
+    }
+
+    if (isNetworkImage) {
+      return Image.network(
+        imageUrl,
+        fit: fit,
+        errorBuilder: (_, __, ___) => const Icon(
+          Icons.broken_image,
+          color: Colors.grey,
+        ),
+      );
+    }
+
+    return Image.asset(
+      imageUrl,
+      fit: fit,
+      errorBuilder: (_, __, ___) => const Icon(
+        Icons.broken_image,
+        color: Colors.grey,
       ),
     );
   }
