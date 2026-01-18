@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
 import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
@@ -14,7 +15,7 @@ class USortableProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = AllProductController.instance;
+    final controller = Get.put(AllProductController());
     controller.assignProducts(products);
     return Column(
       children: [

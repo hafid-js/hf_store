@@ -8,6 +8,7 @@ import 'package:hf_shop/features/shop/controllers/brand/brand_controller.dart';
 import 'package:hf_shop/features/shop/controllers/category/category_controller.dart';
 import 'package:hf_shop/features/shop/models/brand_model.dart';
 import 'package:hf_shop/features/shop/screens/all_brands/all_brands.dart';
+import 'package:hf_shop/features/shop/screens/all_brands/brand_products.dart';
 import 'package:hf_shop/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:hf_shop/features/shop/screens/store/widgets/store_primary_header.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
@@ -74,7 +75,7 @@ class StoreScreen extends StatelessWidget {
                                         brandController.featuredBrands[index];
                                     return SizedBox(
                                       width: USizes.brandCardWidth,
-                                      child: UBrandCard(brand: brand),
+                                      child: UBrandCard(brand: brand, onTap: () => Get.to(() => BrandProductsScreen(title: brand.name, brand: brand,))),
                                     );
                                   },
                                 );

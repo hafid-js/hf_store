@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:hf_shop/data/repositories/brand/brand_repository.dart';
+import 'package:hf_shop/data/repositories/product/product_repository.dart';
 import 'package:hf_shop/features/shop/models/brand_model.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/popups/snackbar_helpers.dart';
 
 class BrandController extends GetxController {
@@ -30,6 +32,17 @@ class BrandController extends GetxController {
       USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+
+  Future<List<ProductModel>> getBrandProducts(String brandId) async {
+    try {
+      List<ProductModel> products = await ProductRepository.instance.getProductsForBrand(brandId: brandId);
+      return products;
+    } catch (e) {
+      USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
+      return [];
     }
   }
 

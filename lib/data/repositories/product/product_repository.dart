@@ -166,12 +166,51 @@ class ProductRepository extends GetxController {
 
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
     try {
+      final query = await _db
+          .collection(UKeys.productsCollection)
+          .where('isFeatured', isEqualTo: true)
+          .get();
 
-      final querySnapshot = await query.get();
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
+            .toList();
+        return products;
+      }
 
-      if (querySnapshot.docs.isNotEmpty) {
-        List<ProductModel> products = querySnapshot.docs
-            .map((document) => ProductModel.fromQuerySnapshot(document))
+      return [];
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong ${e.toString()}. Please try again!';
+    }
+  }
+
+  Future<List<ProductModel>> getProductsForBrand({
+    required String brandId,
+    int limit = -1,
+  }) async {
+    try {
+      final query = limit == -1
+          ? await _db
+                .collection(UKeys.productsCollection)
+                .where('brand.id', isEqualTo: brandId)
+                .get()
+          : await _db
+                .collection(UKeys.productsCollection)
+                .where('brand.id', isEqualTo: brandId)
+                .limit(limit)
+                .get();
+
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
             .toList();
         return products;
       }
