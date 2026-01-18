@@ -27,32 +27,32 @@ class BrandModel {
     };
   }
 
-  factory BrandModel.fromJson(Map<String, dynamic> document) {
-    final data = document;
-    if (data.isEmpty) return BrandModel.empty();
-    return BrandModel(
-      id: data['id'],
-      name: data['name'],
-      image: data['image'],
-      isFeatured: data['isFeatured'],
-      productsCount: data['productCount'],
-    );
-  }
+  factory BrandModel.fromJson(Map<String, dynamic> data) {
+  if (data.isEmpty) return BrandModel.empty();
+
+  return BrandModel(
+    id: data['id'] ?? '',
+    name: data['name'] ?? '',
+    image: data['image'] ?? '',
+    isFeatured: data['isFeatured'],
+    productsCount: data['productCount'],
+  );
+}
+
 
   factory BrandModel.fromSnapshot(
-    DocumentSnapshot<Map<String, dynamic>> document,
-  ) {
-    if (document.data() != null) {
-      Map<String, dynamic> data = document.data()!;
-      return BrandModel(
-        id: data['id'],
-        name: data['name'],
-        image: data['image'],
-        isFeatured: data['isFeatured'],
-        productsCount: data['productCount'],
-      );
-    } else {
-      return BrandModel.empty();
-    }
-  }
+  DocumentSnapshot<Map<String, dynamic>> document,
+) {
+  final data = document.data();
+  if (data == null) return BrandModel.empty();
+
+  return BrandModel(
+    id: data['id'] ?? document.id,
+    name: data['name'] ?? '',
+    image: data['image'] ?? '',
+    isFeatured: data['isFeatured'],
+    productsCount: data['productCount'],
+  );
+}
+
 }

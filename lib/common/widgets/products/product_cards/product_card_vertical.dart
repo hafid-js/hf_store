@@ -7,19 +7,24 @@ import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
 import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
+import 'package:hf_shop/features/shop/controllers/product/product_controller.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/features/shop/screens/product_details/product_details.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
-import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
 class UProductCardVertical extends StatelessWidget {
-  const UProductCardVertical({super.key});
+  const UProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+
     final dark = UHelperFunctions.isDarkMode(context);
+    final controller = ProductController.instance;
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen()),
@@ -31,6 +36,7 @@ class UProductCardVertical extends StatelessWidget {
           borderRadius: BorderRadius.circular(USizes.productImageRadius),
           color: dark ? UColors.darkGrey : UColors.white,
         ),
+        
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +49,8 @@ class UProductCardVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   // thumbnail
-                  Center(child: URoundedImage(imageUrl: UImages.productImage15),),
+                  Center(child: URoundedImage(imageUrl: product.thumbnail, isNetworkImage: true,),),
+                  
 
                   // discount tag
                   Positioned(
@@ -84,11 +91,11 @@ class UProductCardVertical extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // product title
-                  UProductTitleText(title: 'Blue Bata Shoes', smallSize: true),
+                  UProductTitleText(title: product.title, smallSize: true),
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
                   // product brand
-                  UBrandTitleWithVerifyIcon(title: 'Bata'),
+                  UBrandTitleWithVerifyIcon(title: product.brand?.name ?? ''),
 
                   // product prices & add button
                 ],

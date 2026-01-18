@@ -19,4 +19,5 @@ class UKeys {
   static const String categoryFolder = 'Category Pictures';
   static const String bannerFolder = 'Banners Images';
   static const String brandsFolder = 'Brands Images';
+   static const String productsFolder = 'Products Images';
 }

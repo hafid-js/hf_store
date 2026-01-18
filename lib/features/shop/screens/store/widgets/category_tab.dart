@@ -3,6 +3,7 @@ import 'package:hf_shop/common/widgets/brands/brand_showcase.dart';
 import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
 import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
@@ -38,7 +39,7 @@ class UCategoryTab extends StatelessWidget {
           SizedBox(height: USizes.spaceBtwItems,),
           USectionHeading(title: 'You might like', onPressed: () {},),
           UGridLayout(itemCount: 4, itemBuilder: (context, index) {
-            return UProductCardVertical();
+            return UProductCardVertical(product: ProductModel.empty());
           }),
 
           SizedBox(height: USizes.spaceBtwSections,)

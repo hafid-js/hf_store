@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,20 +22,30 @@ class BrandRepository extends GetxController {
 
 
   Future<void> uploadBrands(List<BrandModel> brands) async {
-    try {
+  try {
+    for (final original in brands) {
 
-      for(BrandModel brand in brands){
-        File brandImage = await UHelperFunctions.assetToFile(brand.image);
+      final brand = BrandModel.fromJson(original.toJson());
 
-       dio.Response response = await _cloudinaryServices.uploadImage(brandImage, UKeys.brandsFolder);
-       if(response.statusCode == 200) {
-        brand.image = response.data['url'];
-       }
+      if (brand.image.startsWith('assets/')) {
+        final file = await UHelperFunctions.assetToFile(brand.image);
 
-       await _db.collection(UKeys.brandsCollection).doc(brand.id).set(brand.toJson());
+        final dio.Response res = await _cloudinaryServices.uploadImage(
+          file,
+          UKeys.brandsFolder,
+        );
 
-       print('Brand ${brand.name} uploaded successfully');
+        if (res.statusCode == 200) {
+          brand.image = res.data['url'];
+        }
       }
+      await _db
+          .collection(UKeys.brandsCollection)
+          .doc(brand.id)
+          .set(brand.toJson());
+
+      print('Brand ${brand.name} uploaded');
+    }
 
 
     } on FirebaseAuthException catch (e) {

@@ -5,7 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hf_shop/data/repositories/brand/brand_repository.dart';
+import 'package:hf_shop/data/repositories/product/product_repository.dart';
 import 'package:hf_shop/data/repositories/user/user_repository.dart';
 import 'package:hf_shop/dummy_data.dart';
 import 'package:hf_shop/features/authentication/screens/login/login.dart';
@@ -35,6 +35,7 @@ class AuthenticationRepository extends GetxController {
     // Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
     // Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
     // Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
+    // Get.put(ProductRepository()).uploadProducts(UDummyData.products);
   }
 
   void screenRedirect() {
