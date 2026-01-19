@@ -8,12 +8,10 @@ import 'package:hf_shop/utils/popups/snackbar_helpers.dart';
 class BrandController extends GetxController {
   static BrandController get instance => Get.find();
 
-
   final _repository = Get.put(BrandRepository());
   RxList<BrandModel> allBrands = <BrandModel>[].obs;
   RxList<BrandModel> featuredBrands = <BrandModel>[].obs;
   RxBool isLoading = false.obs;
-
 
   @override
   void onInit() {
@@ -27,18 +25,20 @@ class BrandController extends GetxController {
       List<BrandModel> allBrands = await _repository.fetchBrands();
       this.allBrands.assignAll(allBrands);
 
-      featuredBrands.assignAll(allBrands.where((brand) => brand.isFeatured ?? false).toList());
-    } catch(e) {
+      featuredBrands.assignAll(
+        allBrands.where((brand) => brand.isFeatured ?? false).toList(),
+      );
+    } catch (e) {
       USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
     } finally {
       isLoading.value = false;
     }
   }
 
-
-  Future<List<ProductModel>> getBrandProducts(String brandId) async {
+  Future<List<ProductModel>> getBrandProducts(String brandId, {int limit = -1}) async {
     try {
-      List<ProductModel> products = await ProductRepository.instance.getProductsForBrand(brandId: brandId);
+      List<ProductModel> products = await ProductRepository.instance
+          .getProductsForBrand(brandId: brandId, limit: limit);
       return products;
     } catch (e) {
       USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
@@ -46,4 +46,13 @@ class BrandController extends GetxController {
     }
   }
 
+  Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
+    try {
+      final brands = await _repository.fetchBrandsForCategory(categoryId);
+      return brands;
+    } catch (e) {
+      USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
+      return [];
+    }
+  }
 }

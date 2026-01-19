@@ -228,4 +228,47 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong ${e.toString()}. Please try again!';
     }
   }
+
+  Future<List<ProductModel>> getProductsForCategory({
+    required String categoryId,
+    int limit = -4,
+  }) async {
+    try {
+      final productCategoryQuery = limit == -1
+          ? await _db
+                .collection(UKeys.productCategoryCollection)
+                .where('categoryId', isEqualTo: categoryId)
+                .get()
+          : await _db
+                .collection(UKeys.productCategoryCollection)
+                .where('categoryId', isEqualTo: categoryId)
+                .limit(limit)
+                .get();
+
+      List<String> productIds = productCategoryQuery.docs
+          .map((doc) => doc['productId'] as String)
+          .toList();
+
+      final productQuery = await _db
+          .collection(UKeys.productsCollection)
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+
+      List<ProductModel> products = productQuery.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+
+          return products;
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong ${e.toString()}. Please try again!';
+    }
+  }
 }

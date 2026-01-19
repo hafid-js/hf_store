@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:hf_shop/data/repositories/category/category_repository.dart';
+import 'package:hf_shop/data/repositories/product/product_repository.dart';
 import 'package:hf_shop/features/shop/models/category_model.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/popups/snackbar_helpers.dart';
 
 class CategoryController extends GetxController {
-
   static CategoryController get instance => Get.find();
 
   final _repository = Get.put(CategoryRepository());
@@ -21,17 +22,35 @@ class CategoryController extends GetxController {
 
   Future<void> fetchCategories() async {
     try {
-
       isCategoriesLoading.value = true;
 
       List<CategoryModel> categories = await _repository.getAllCategories();
       allCategories.assignAll(categories);
-      featuredCategories.assignAll(categories.where((category) => category.isFeatured && category.parentId.isEmpty));
-    } catch(e) {
+      featuredCategories.assignAll(
+        categories.where(
+          (category) => category.isFeatured && category.parentId.isEmpty,
+        ),
+      );
+    } catch (e) {
       USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
     } finally {
       isCategoriesLoading.value = false;
     }
   }
 
+  Future<List<ProductModel>> getCategoryProducts({
+    required String categoryId,
+    int limit = 4,
+  }) async {
+    try {
+      final products = ProductRepository.instance.getProductsForCategory(
+        categoryId: categoryId,
+        limit: limit,
+      );
+      return products;
+    } catch (e) {
+      USnackBarHelpers.errorSnackBar(title: 'Failed!', message: e.toString());
+      return [];
+    }
+  }
 }

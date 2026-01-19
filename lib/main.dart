@@ -20,7 +20,7 @@ Future<void> main() async {
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await GetStorage.init();
-    Get.put(NetworkManager(),permanent: true);
+  Get.put(NetworkManager(), permanent: true);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -29,6 +29,6 @@ Future<void> main() async {
   });
 
   Get.put(HomeController(), permanent: true);
- Get.put(UserController(), permanent: true);
+  Get.put(UserController(), permanent: true);
   runApp(const MyApp());
 }

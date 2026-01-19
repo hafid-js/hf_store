@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/data/services/cloudinary_services.dart';
+import 'package:hf_shop/features/shop/models/brand_category.dart';
 import 'package:hf_shop/features/shop/models/category_model.dart';
+import 'package:hf_shop/features/shop/models/product_category_model.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/keys.dart';
 import 'package:hf_shop/utils/exceptions/firebase_auth_exceptions.dart';
@@ -19,6 +21,49 @@ class CategoryRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
   final _cloudinaryServices = Get.put(CloudinaryServices());
+
+
+  Future<void> uploadBrandCategory(List<BrandCategoryModel> brandCategories) async {
+    try {
+      for(final brandCategory in brandCategories) {
+        await _db.collection(UKeys.brandCategoryCollection).doc().set(brandCategory.toJson());
+
+          print('Upload ${brandCategory.brandId}');
+      }
+
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+   Future<void> uploadProductCategory(List<ProductCategoryModel> productCategories) async {
+    try {
+      for(final productCategory in productCategories) {
+        await _db.collection(UKeys.productCategoryCollection).doc().set(productCategory.toJson());
+
+        print('Upload ${productCategory.productId}');
+      }
+
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
 
   Future<void> uploadCategories(List<CategoryModel> categories) async {
     try {

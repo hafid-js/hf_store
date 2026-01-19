@@ -6,6 +6,8 @@ class UKeys {
   static const String categoryCollection = 'Categories';
   static const String productsCollection = 'Products';
   static const String brandsCollection = 'Brands';
+  static const String brandCategoryCollection = 'BrandCategory';
+  static const String productCategoryCollection = 'ProductCategory';
 
   static const String rememberEmail = 'rememberEmail';
   static const String rememberPassword = 'rememberPassword';
@@ -19,5 +21,5 @@ class UKeys {
   static const String categoryFolder = 'Category Pictures';
   static const String bannerFolder = 'Banners Images';
   static const String brandsFolder = 'Brands Images';
-   static const String productsFolder = 'Products Images';
+  static const String productsFolder = 'Products Images';
 }
