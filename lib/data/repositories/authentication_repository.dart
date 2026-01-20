@@ -22,6 +22,7 @@ class AuthenticationRepository extends GetxController {
 
   final localStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+  final storage = GetStorage('userId');
 
   User? get currentUser => _auth.currentUser;
   @override
@@ -38,14 +39,16 @@ class AuthenticationRepository extends GetxController {
     // Get.put(ProductRepository()).uploadProducts(UDummyData.products);
   }
 
-  void screenRedirect() {
+  Future<void> screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
         Get.offAll(() => NavigationMenu());
+        await GetStorage.init(user.uid);
       } else {
         Get.offAll(() => VerifyEmailScreen(email: user.email));
       }
+      
     } else {
       localStorage.writeIfNull('isFirstTime', true);
 

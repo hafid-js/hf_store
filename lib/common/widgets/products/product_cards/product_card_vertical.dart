@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/common/style/shadow.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
-import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
+import 'package:hf_shop/common/widgets/icons/favourite_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
@@ -27,7 +27,7 @@ class UProductCardVertical extends StatelessWidget {
     final controller = ProductController.instance;
 
     return GestureDetector(
-      onTap: () => Get.to(() => ProductDetailsScreen()),
+      onTap: () => Get.to(() => ProductDetailsScreen(product: product,)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -50,8 +50,7 @@ class UProductCardVertical extends StatelessWidget {
                 children: [
                   // thumbnail
                   Center(child: URoundedImage(imageUrl: product.thumbnail, isNetworkImage: true,),),
-                  
-
+                
                   // discount tag
                   Positioned(
                     top: 12.0,
@@ -74,10 +73,7 @@ class UProductCardVertical extends StatelessWidget {
                   Positioned(
                     right: 0,
                     top: 0,
-                    child: UCircularIcon(
-                      icon: Iconsax.heart5,
-                      color: Colors.red,
-                    ),
+                    child: UFavouriteIcon(productId: product.id,),
                   ),
                 ],
               ),

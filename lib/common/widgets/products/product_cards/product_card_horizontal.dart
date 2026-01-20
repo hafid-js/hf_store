@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
+import 'package:hf_shop/common/widgets/icons/favourite_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
 import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/images.dart';
@@ -13,6 +15,7 @@ import 'package:iconsax/iconsax.dart';
 
 class UProductCardHorizontal extends StatelessWidget {
   const UProductCardHorizontal({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,7 @@ class UProductCardHorizontal extends StatelessWidget {
                 Positioned(
                   right: 0,
                   top: 0,
-                  child: UCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                  child: UFavouriteIcon(productId: '',),
                 ),
               ],
             ),

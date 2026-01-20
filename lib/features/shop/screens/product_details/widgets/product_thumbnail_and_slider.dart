@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
-import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
+import 'package:hf_shop/common/widgets/icons/favourite_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
-import 'package:iconsax/iconsax.dart';
 
 class UProductThumbnailAndSlider extends StatelessWidget {
-  const UProductThumbnailAndSlider({super.key});
+  const UProductThumbnailAndSlider({super.key, required this.product});
+
+    final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class UProductThumbnailAndSlider extends StatelessWidget {
 
           UAppBar(
             showBackArrow: true,
-            actions: [UCircularIcon(icon: Iconsax.heart5, color: Colors.red)],
+            actions: [UFavouriteIcon(productId: product.id,),],
           ),
         ],
       ),

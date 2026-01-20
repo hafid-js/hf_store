@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:get/utils.dart';
 import 'package:hf_shop/common/widgets/brands/brand_card.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/shimmer/shimmer_effect.dart';
@@ -29,17 +28,14 @@ class UBrandShowcase extends StatelessWidget {
       padding: EdgeInsets.all(USizes.md),
       margin: EdgeInsets.only(bottom: USizes.spaceBtwItems),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          UBrandCard(showBorder: false, brand: brand),
-
-          Row(
-            children: images
-                .map((image) => buildBrandImage(dark, image))
-                .toList(),
-          ),
-        ],
-      ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+    
+            UBrandCard(showBorder: false, brand: brand),
+      
+            Row(children: images.map((image) => buildBrandImage(dark, image)).toList())
+          ],
+        ),
     ),
     );
   }
@@ -52,10 +48,7 @@ class UBrandShowcase extends StatelessWidget {
         padding: const EdgeInsets.all(USizes.md),
         backgroundColor: dark ? UColors.darkGrey : UColors.light,
         child: CachedNetworkImage(
-          imageUrl: image,
-          fit: BoxFit.contain,
-          progressIndicatorBuilder: (context, url, progress) =>
-              UShimmerEffect(width: 100, height: 100),
+          imageUrl: image, fit: BoxFit.contain, progressIndicatorBuilder: (context, url, progress) => UShimmerEffect(width: 100, height: 100),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),
