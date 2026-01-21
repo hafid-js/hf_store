@@ -55,7 +55,7 @@ class UHomeCategories extends StatelessWidget {
                   title: category.name,
                   image: category.image,
                   textColor: UColors.white,
-                  onTap: () => Get.to(() => SubCategoryScreen()),
+                  onTap: () => Get.to(() => SubCategoryScreen(category: category)),
                 );
               },
             ),

@@ -3,7 +3,7 @@ import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/features/shop/models/product_model.dart';
-import 'package:hf_shop/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
+import 'package:hf_shop/common/widgets/button/bottom_add_to_cart.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_thumbnail_and_slider.dart';

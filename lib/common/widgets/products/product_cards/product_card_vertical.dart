@@ -25,6 +25,7 @@ class UProductCardVertical extends StatelessWidget {
 
     final dark = UHelperFunctions.isDarkMode(context);
     final controller = ProductController.instance;
+    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen(product: product,)),
@@ -51,7 +52,7 @@ class UProductCardVertical extends StatelessWidget {
                   // thumbnail
                   Center(child: URoundedImage(imageUrl: product.thumbnail, isNetworkImage: true,),),
                 
-                  // discount tag
+                  if(salePercentage != null)
                   Positioned(
                     top: 12.0,
                     child: URoundedContainer(
@@ -62,7 +63,7 @@ class UProductCardVertical extends StatelessWidget {
                         vertical: USizes.xs,
                       ),
                       child: Text(
-                        '20%',
+                        '$salePercentage%',
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge!.apply(color: UColors.black),
@@ -106,7 +107,7 @@ class UProductCardVertical extends StatelessWidget {
                 // product price
                 Padding(
                   padding: EdgeInsets.only(left: USizes.sm),
-                  child: UProductPriceText(price: '65'),
+                  child: UProductPriceText(price: controller.getProductPrice(product)),
                 ),
 
                 // add to cart button

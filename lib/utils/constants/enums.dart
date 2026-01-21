@@ -3,3 +3,8 @@ enum TextSizes {
   medium,
   large
 }
+
+enum ProductType {
+  single,
+  variable
+}

@@ -6,6 +6,7 @@ import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
 import 'package:hf_shop/common/widgets/texts/product_price_text.dart';
 import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
+import 'package:hf_shop/features/shop/controllers/product/product_controller.dart';
 import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
@@ -14,12 +15,15 @@ import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
 class UProductCardHorizontal extends StatelessWidget {
-  const UProductCardHorizontal({super.key});
+  const UProductCardHorizontal({super.key, required this.product});
 
 
+final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
+      final controller = ProductController.instance;
+    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     return Container(
       width: 310,
       padding: EdgeInsets.all(1),
@@ -41,6 +45,7 @@ class UProductCardHorizontal extends StatelessWidget {
                   child: URoundedImage(imageUrl: UImages.productImage15),
                 ),
 
+                if(salePercentage != null)
                 Positioned(
                   top: 12.0,
                   child: URoundedContainer(
@@ -51,7 +56,7 @@ class UProductCardHorizontal extends StatelessWidget {
                       vertical: USizes.xs,
                     ),
                     child: Text(
-                      '20%',
+                      '$salePercentage%',
                       style: Theme.of(
                         context,
                       ).textTheme.labelLarge!.apply(color: UColors.black),
@@ -62,7 +67,7 @@ class UProductCardHorizontal extends StatelessWidget {
                 Positioned(
                   right: 0,
                   top: 0,
-                  child: UFavouriteIcon(productId: '',),
+                  child: UFavouriteIcon(productId: product.id),
                 ),
               ],
             ),
@@ -79,12 +84,12 @@ class UProductCardHorizontal extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       UProductTitleText(
-                        title: 'Blue Bata Shoes',
+                        title: product.title,
                         smallSize: true,
                       ),
                       SizedBox(height: USizes.spaceBtwItems / 2),
 
-                      UBrandTitleWithVerifyIcon(title: 'Bata'),
+                      UBrandTitleWithVerifyIcon(title: product.brand!.name),
                     ],
                   ),
                   Spacer(),
