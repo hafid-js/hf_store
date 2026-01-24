@@ -1,47 +1,55 @@
-class ProductVariationModel {
-  String id;
-  Map<String, String> attributeValues;
-  double price;
-  int stock;
-  double? salePrice;
-  String? image;
+class ProductVariationModel{
+  final String id;
+  String sku;
+  String image;
   String? description;
-  String? sku;
+  double price;
+  double salePrice;
+  int stock;
+  Map<String, String> attributeValues;
 
   ProductVariationModel({
     required this.id,
-    required this.attributeValues,
-    required this.price,
-    required this.stock,
-    this.salePrice,
-    this.image,
-    this.description,
-    this.sku,
+    this.sku = '',
+    this.image = '',
+    this.description = '',
+    this.price = 0.0,
+    this.salePrice = 0.0,
+    this.stock = 0,
+    required this.attributeValues
   });
 
-  Map<String, dynamic> toJson() {
+
+  static ProductVariationModel empty() => ProductVariationModel(id: '', attributeValues: {});
+
+
+  Map<String, dynamic> toJson(){
     return {
-      'id': id,
-      'attributeValues': attributeValues,
-      'price': price,
-      'stock': stock,
+      'id' : id,
+      'sku' : sku,
       'image': image,
       'description': description,
-      'sku': sku,
+      'price': price,
+      'salePrice': salePrice,
+      'stock': stock,
+      'attributeValues': attributeValues
     };
   }
 
-  factory ProductVariationModel.fromJson(Map<String, dynamic> json) {
+
+  factory ProductVariationModel.fromJson(Map<String, dynamic> document){
+    final data = document;
+    if(data.isEmpty) return ProductVariationModel.empty();
+
     return ProductVariationModel(
-      id: json['id'] ?? '',
-      attributeValues:
-          Map<String, String>.from(json['attributeValues'] ?? {}),
-      price: (json['price'] ?? 0).toDouble(),
-      stock: json['stock'] ?? 0,
-      salePrice: json['salePrice']?.toDouble(),
-      image: json['image'],
-      description: json['description'],
-      sku: json['sku'],
+        id: data['id'] ?? '',
+        description: data['description'] ?? '',
+        image: data['image'],
+        price: double.parse((data['price'] ?? 0.0).toString()),
+        salePrice: double.parse((data['salePrice'] ?? 0.0).toString()),
+        sku: data['sku'] ?? '',
+        stock: data['stock'] ?? 0,
+        attributeValues: Map<String,String>.from(data['attributeValues'])
     );
   }
 }

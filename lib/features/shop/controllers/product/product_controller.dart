@@ -83,5 +83,12 @@ class ProductController extends GetxController {
 
     return '${UTexts.currency}${smallestPrice.toStringAsFixed(0)}'
         ' - ${UTexts.currency}${largestPrice.toStringAsFixed(0)}';
+
+        
+  }
+
+
+  String getProductStockStatus(int stock) {
+    return stock > 0 ? 'In Stock' : 'Out of Stock';
   }
 }

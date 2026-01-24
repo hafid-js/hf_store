@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
+import 'package:hf_shop/features/shop/controllers/product/product_controller.dart';
 import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/common/widgets/button/bottom_add_to_cart.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:hf_shop/features/shop/screens/product_details/widgets/product_thumbnail_and_slider.dart';
+import 'package:hf_shop/utils/constants/enums.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:readmore/readmore.dart';
 
@@ -17,6 +19,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -26,12 +29,14 @@ class ProductDetailsScreen extends StatelessWidget {
               padding: UPadding.screenPadding,
               child: Column(
                 children: [
-                  UProductMetaData(),
+                  UProductMetaData(product: product,),
                   SizedBox(height: USizes.spaceBtwSections),
 
-                  UProductAttributes(),
+                 if(product.productType == ProductType.variable.toString())...[
+                   UProductAttributes(product: product,),
 
                   SizedBox(height: USizes.spaceBtwSections),
+                 ],
 
                   UElevatedButton(onPressed: () {}, child: Text('Checkout')),
                   SizedBox(height: USizes.spaceBtwSections),
@@ -44,7 +49,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
 
                   ReadMoreText(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: 'Show More',

@@ -178,7 +178,7 @@ date: json['date'] is Timestamp
 }
 
 extension ProductModelHelpers on ProductModel {
-  // Mengambil variasi berdasarkan index, aman dari error
+
   ProductVariationModel? getVariationSafe(int index) {
     if (productVariations != null &&
         productVariations!.isNotEmpty &&
@@ -189,7 +189,7 @@ extension ProductModelHelpers on ProductModel {
     return null; // fallback kalau index tidak valid
   }
 
-  // Ambil harga, jika ada salePrice gunakan itu
+
   double getEffectivePrice({int? variationIndex}) {
     final variation = variationIndex != null
         ? getVariationSafe(variationIndex)
@@ -200,7 +200,7 @@ extension ProductModelHelpers on ProductModel {
     return salePrice ?? price;
   }
 
-  // Ambil stock, bisa untuk produk variable juga
+
   int getEffectiveStock({int? variationIndex}) {
     final variation = variationIndex != null
         ? getVariationSafe(variationIndex)
@@ -210,4 +210,5 @@ extension ProductModelHelpers on ProductModel {
     }
     return stock;
   }
+
 }

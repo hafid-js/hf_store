@@ -22,4 +22,6 @@ class ProductAttributeModel {
           : [],
     );
   }
+
+  Map<String, dynamic>? get attributeValues => null;
 }

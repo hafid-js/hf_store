@@ -10,7 +10,7 @@ class UChoiceChip extends StatelessWidget {
 
   final String text;
   final bool selected;
-  final Function(bool?) onSelected;
+  final Function(bool)? onSelected;
 
   @override
   Widget build(BuildContext context) {
