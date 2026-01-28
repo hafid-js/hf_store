@@ -8,7 +8,6 @@ import 'package:hf_shop/features/shop/controllers/product/product_controller.dar
 import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/enums.dart';
-import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/constants/texts.dart';
 

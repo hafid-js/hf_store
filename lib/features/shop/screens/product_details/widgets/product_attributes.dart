@@ -102,7 +102,7 @@ class UProductAttributes extends StatelessWidget {
                   showActionButton: false,
                 ),
                 SizedBox(height: USizes.spaceBtwItems / 2),
-                Wrap(
+                Obx(() => Wrap(
                   spacing: USizes.sm,
                   children: attribute.values!.map((attributeValue) {
                     bool isSelected = controller.selectedAttributes[attribute.name] == attributeValue;
@@ -112,12 +112,12 @@ class UProductAttributes extends StatelessWidget {
                       selected: isSelected,
                       onSelected: available ? (selected) {
                         if(available && selected) {
-                          controller.onAttributeSelected(product, attribute.name!, attributeValue);
+                          controller.onAttributeSelected(product, attribute.name, attributeValue);
                         }
                       } : null,
-                    );
+                    ) ;
                   }).toList(),
-                ),
+                )),
               ],
             );
           }).toList(),

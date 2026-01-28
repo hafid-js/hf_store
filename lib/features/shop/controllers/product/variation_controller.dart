@@ -20,7 +20,7 @@ class VariationController extends GetxController {
       this.selectedAttributes,
     );
     selectedAttributes[attributeName] = attributeValue;
-    this.selectedAttributes[attributeValue] = attributeValue;
+    this.selectedAttributes[attributeName] = attributeValue;
 
     ProductVariationModel selectedVariation = product.productVariations!
         .firstWhere(
