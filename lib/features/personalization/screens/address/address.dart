@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
+import 'package:hf_shop/features/personalization/controllers/address_controller.dart';
+import 'package:hf_shop/features/personalization/models/address_model.dart';
 import 'package:hf_shop/features/personalization/screens/address/add_new_address.dart';
 import 'package:hf_shop/features/personalization/screens/address/widgets/single_address.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
+import 'package:hf_shop/utils/constants/helpers/cloud_helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -13,6 +16,7 @@ class AddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddressController());
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
@@ -21,22 +25,36 @@ class AddressScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
+      body: Padding(
           padding: UPadding.screenPadding,
-          child: Column(
-            children: [
-              USingleAddress(isSelected: true),
-              SizedBox(height: USizes.spaceBtwItems),
-              USingleAddress(isSelected: false),
-            ],
-          ),
+          child: Obx(() => FutureBuilder(
+            key: Key(controller.refreshData.value.toString()),
+            future: controller.getAllAddresses(),
+            builder: (context, snapshot) {
+              final widget = UCloudHelperFunctions.checkMultiRecordState(
+                snapshot: snapshot,
+              );
+              if (widget != null) return widget;
+
+              List<AddressModel> addresses = snapshot.data!;
+              return ListView.separated(
+                separatorBuilder: (context, index) =>
+                    SizedBox(height: USizes.spaceBtwItems),
+                itemCount: addresses.length,
+                itemBuilder: (context, index) {
+                  return USingleAddress(
+                    onTap: () => controller.selectAddress(addresses[index]),
+                    address: addresses[index],
+                  );
+                },
+              );
+            },
+          ),)
         ),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.to(() => AddNewAddressScreen()),
         backgroundColor: UColors.primary,
-        child: Icon(Iconsax.add),
+        child: Icon(Iconsax.add, color: UColors.white),
       ),
     );
   }
