@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/common/style/shadow.dart';
+import 'package:hf_shop/common/widgets/button/add_to_cart_button.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:hf_shop/common/widgets/icons/favourite_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
@@ -13,7 +14,6 @@ import 'package:hf_shop/features/shop/screens/product_details/product_details.da
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
-import 'package:iconsax/iconsax.dart';
 
 class UProductCardVertical extends StatelessWidget {
   const UProductCardVertical({super.key, required this.product});
@@ -22,13 +22,15 @@ class UProductCardVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final dark = UHelperFunctions.isDarkMode(context);
     final controller = ProductController.instance;
-    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
+    String? salePercentage = controller.calculateSalePercentage(
+      product.price,
+      product.salePrice,
+    );
 
     return GestureDetector(
-      onTap: () => Get.to(() => ProductDetailsScreen(product: product,)),
+      onTap: () => Get.to(() => ProductDetailsScreen(product: product)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -37,44 +39,46 @@ class UProductCardVertical extends StatelessWidget {
           borderRadius: BorderRadius.circular(USizes.productImageRadius),
           color: dark ? UColors.darkGrey : UColors.white,
         ),
-        
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // thumnnail favorite button and discount tag
             URoundedContainer(
               height: 180,
               padding: const EdgeInsets.all(USizes.sm),
               backgroundColor: dark ? UColors.dark : UColors.light,
               child: Stack(
                 children: [
-                  // thumbnail
-                  Center(child: URoundedImage(imageUrl: product.thumbnail, isNetworkImage: true,),),
-                
-                  if(salePercentage != null)
-                  Positioned(
-                    top: 12.0,
-                    child: URoundedContainer(
-                      radius: USizes.sm,
-                      backgroundColor: UColors.yellow.withValues(alpha: 0.8),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: USizes.sm,
-                        vertical: USizes.xs,
-                      ),
-                      child: Text(
-                        '$salePercentage%',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelLarge!.apply(color: UColors.black),
-                      ),
+                  Center(
+                    child: URoundedImage(
+                      imageUrl: product.thumbnail,
+                      isNetworkImage: true,
                     ),
                   ),
+
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 12.0,
+                      child: URoundedContainer(
+                        radius: USizes.sm,
+                        backgroundColor: UColors.yellow.withValues(alpha: 0.8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: USizes.sm,
+                          vertical: USizes.xs,
+                        ),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge!.apply(color: UColors.black),
+                        ),
+                      ),
+                    ),
 
                   Positioned(
                     right: 0,
                     top: 0,
-                    child: UFavouriteIcon(productId: product.id,),
+                    child: UFavouriteIcon(productId: product.id),
                   ),
                 ],
               ),
@@ -87,14 +91,10 @@ class UProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // product title
                   UProductTitleText(title: product.title, smallSize: true),
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
-                  // product brand
                   UBrandTitleWithVerifyIcon(title: product.brand?.name ?? ''),
-
-                  // product prices & add button
                 ],
               ),
             ),
@@ -104,25 +104,14 @@ class UProductCardVertical extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // product price
                 Padding(
                   padding: EdgeInsets.only(left: USizes.sm),
-                  child: UProductPriceText(price: controller.getProductPrice(product)),
+                  child: UProductPriceText(
+                    price: controller.getProductPrice(product),
+                  ),
                 ),
 
-                // add to cart button
-                Container(
-                  width: USizes.iconLg * 1.2,
-                  height: USizes.iconLg * 1.2,
-                  decoration: BoxDecoration(
-                    color: UColors.primary,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(USizes.cardRadiusMd),
-                      bottomRight: Radius.circular(USizes.productImageRadius),
-                    ),
-                  ),
-                  child: Icon(Iconsax.add, color: UColors.white),
-                ),
+                ProductAddToCartButton(product: product)
               ],
             ),
           ],

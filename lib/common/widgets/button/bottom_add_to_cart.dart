@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
+import 'package:hf_shop/features/shop/controllers/cart/cart_controller.dart';
+import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
 class UBottomAddToCart extends StatelessWidget {
-  const UBottomAddToCart({super.key});
+  const UBottomAddToCart({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     bool dark = UHelperFunctions.isDarkMode(context);
+    final controller = CartController.instance;
+
+    controller.updateAlreadyAddedProductCount(product);
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: USizes.defaultSpace,
@@ -23,42 +31,53 @@ class UBottomAddToCart extends StatelessWidget {
           topRight: Radius.circular(USizes.cardRadiusLg),
         ),
       ),
-      child: Row(
-        children: [
-          UCircularIcon(
-            icon: Iconsax.minus,
-            backgroundColor: UColors.darkGrey,
-            width: 40,
-            height: 40,
-            color: UColors.white,
-          ),
-          SizedBox(width: USizes.spaceBtwItems),
-          Text('2', style: Theme.of(context).textTheme.titleSmall),
-          SizedBox(width: USizes.spaceBtwItems),
-          UCircularIcon(
-            icon: Iconsax.add,
-            backgroundColor: UColors.black,
-            width: 40,
-            height: 40,
-            color: UColors.white,
-          ),
-          Spacer(),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(USizes.md),
+      child: Obx(
+        () => Row(
+          children: [
+            UCircularIcon(
+              icon: Iconsax.minus,
+              backgroundColor: UColors.darkGrey,
+              width: 40,
+              height: 40,
+              color: UColors.white,
+              onPressed: controller.productQuantityInCart.value < 1
+                  ? null
+                  : () => controller.productQuantityInCart.value -= 1,
+            ),
+            SizedBox(width: USizes.spaceBtwItems),
+            Text(
+              controller.productQuantityInCart.value.toString(),
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            SizedBox(width: USizes.spaceBtwItems),
+            UCircularIcon(
+              icon: Iconsax.add,
               backgroundColor: UColors.black,
-              side: BorderSide(color: UColors.black),
+              width: 40,
+              height: 40,
+              color: UColors.white,
+              onPressed: () => controller.productQuantityInCart.value += 1,
             ),
-            child: Row(
-              children: [
-                Icon(Iconsax.shopping_bag),
-                SizedBox(width: USizes.spaceBtwItems / 2),
-                Text('Add To Cart'),
-              ],
+            Spacer(),
+            ElevatedButton(
+              onPressed: controller.productQuantityInCart.value < 1
+                  ? null
+                  : () => controller.addToCart(product),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(USizes.md),
+                backgroundColor: UColors.black,
+                side: BorderSide(color: UColors.black),
+              ),
+              child: Row(
+                children: [
+                  Icon(Iconsax.shopping_bag),
+                  SizedBox(width: USizes.spaceBtwItems / 2),
+                  Text('Add To Cart'),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hf_shop/common/widgets/button/add_to_cart_button.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
-import 'package:hf_shop/common/widgets/icons/circular_icon.dart';
 import 'package:hf_shop/common/widgets/icons/favourite_icon.dart';
 import 'package:hf_shop/common/widgets/images/rounded_image.dart';
 import 'package:hf_shop/common/widgets/texts/brand_title_with_verify_icon.dart';
@@ -96,21 +96,8 @@ final ProductModel product;
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(child: UProductPriceText(price: '65'),),
-                      Container(
-                        width: USizes.iconLg * 1.2,
-                        height: USizes.iconLg * 1.2,
-                        decoration: BoxDecoration(
-                          color: UColors.primary,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(USizes.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              USizes.productImageRadius,
-                            ),
-                          ),
-                        ),
-                        child: Icon(Iconsax.add, color: UColors.white),
-                      ),
+                      Flexible(child: UProductPriceText(price: controller.getProductPrice(product)),),
+                      ProductAddToCartButton(product: product)
                     ],
                   ),
                 ],

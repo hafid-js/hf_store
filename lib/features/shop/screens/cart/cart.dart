@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/button/elevated_button.dart';
+import 'package:hf_shop/features/shop/controllers/cart/cart_controller.dart';
 import 'package:hf_shop/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:hf_shop/features/shop/screens/checkout/checkout.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
@@ -12,17 +13,30 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
         title: Text('Cart', style: Theme.of(context).textTheme.headlineMedium),
       ),
-      body: Padding(
-        padding: UPadding.screenPadding,
-        child: UCartItems(),
-      ),
+      body: Obx(() {
+        if (controller.cartItems.isEmpty) {
+          return Center(
+            child: Text('Your cart is empty!'),
+          );
+        }
+        return SingleChildScrollView(
+          child: Padding(padding: UPadding.screenPadding, child: UCartItems()),
+        );
+      }),
 
-      bottomNavigationBar: Padding(padding: const EdgeInsets.all(USizes.defaultSpace), child: UElevatedButton(onPressed: () => Get.to(() => CheckoutScreen()), child: Text('Checkout \$8.249'),)),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(USizes.defaultSpace),
+        child: UElevatedButton(
+          onPressed: () => Get.to(() => CheckoutScreen()),
+          child: Text('Checkout \$8.249'),
+        ),
+      ),
     );
   }
 }

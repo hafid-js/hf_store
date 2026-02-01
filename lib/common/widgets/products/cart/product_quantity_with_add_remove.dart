@@ -5,10 +5,14 @@ import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ProductQuantityWithAddRemove extends StatelessWidget {
-  const ProductQuantityWithAddRemove({
-    super.key,
+class UProductQuantityWithAddRemove extends StatelessWidget {
+  const UProductQuantityWithAddRemove({
+    super.key, required this.quantity, this.add, this.remove,
   });
+
+
+  final int quantity;
+  final VoidCallback? add, remove;
 
   @override
   Widget build(BuildContext context) {
