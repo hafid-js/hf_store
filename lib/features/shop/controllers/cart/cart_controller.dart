@@ -22,6 +22,22 @@ class CartController extends GetxController {
 
   final variationController = VariationController.instance;
 
+ CartController() {
+  loadCartItems();
+ }
+
+  void loadCartItems() {
+    List<dynamic>? storedCartItems = _storage.read(UKeys.cartItemsKey);
+    if (storedCartItems != null) {
+      cartItems.assignAll(
+        storedCartItems.map(
+          (item) => CartItemModel.fromJson(item as Map<String, dynamic>),
+        ),
+      );
+      updateCartTotals();
+    }
+  }
+
   void addToCart(ProductModel product) {
     if (productQuantityInCart < 1) {
       USnackBarHelpers.customToast(message: 'Select Quantity');
@@ -100,6 +116,7 @@ class CartController extends GetxController {
             : cartItems.removeAt(index);
       }
     }
+    updateCart();
   }
 
   void removeFromCartDialog(int index) {

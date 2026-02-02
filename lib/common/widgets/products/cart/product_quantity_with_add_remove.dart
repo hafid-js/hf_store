@@ -29,9 +29,10 @@ class UProductQuantityWithAddRemove extends StatelessWidget {
           backgroundColor: dark
               ? UColors.darkerGrey
               : UColors.light,
+              onPressed: remove,
         ),
         SizedBox(width: USizes.spaceBtwItems),
-        Text('2', style: Theme.of(context).textTheme.titleSmall),
+        Text(quantity.toString(), style: Theme.of(context).textTheme.titleSmall),
         SizedBox(width: USizes.spaceBtwItems),
         UCircularIcon(
           icon: Iconsax.add,
@@ -40,6 +41,7 @@ class UProductQuantityWithAddRemove extends StatelessWidget {
           size: USizes.iconSm,
           color: UColors.white,
           backgroundColor: UColors.primary,
+          onPressed: add,
         ),
       ],
     );

@@ -17,6 +17,7 @@ class UCartItems extends StatelessWidget {
     final controller = CartController.instance;
     return ListView.separated(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       separatorBuilder: (context, index) =>
           SizedBox(height: USizes.spaceBtwSections),
       itemBuilder: (context, index) {
@@ -37,7 +38,7 @@ class UCartItems extends StatelessWidget {
                       remove: () => controller.removeOneFromCart(cartItem)
                     ),
                     Spacer(),
-                    UProductPriceText(price: '8.249'),
+                    UProductPriceText(price: (cartItem.price * cartItem.quantity).toStringAsFixed(0)),
                   ],
                 ),
             ],
