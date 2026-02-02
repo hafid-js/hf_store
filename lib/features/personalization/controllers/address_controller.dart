@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hf_shop/common/widgets/loaders/circular_loader.dart';
+import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/data/repositories/address/address_repository.dart';
 import 'package:hf_shop/features/personalization/models/address_model.dart';
+import 'package:hf_shop/features/personalization/screens/address/widgets/single_address.dart';
+import 'package:hf_shop/features/shop/models/payment_method_model.dart';
+import 'package:hf_shop/features/shop/screens/checkout/widgets/payment_tile.dart';
+import 'package:hf_shop/utils/constants/helpers/cloud_helper_functions.dart';
 import 'package:hf_shop/utils/constants/helpers/network_manager.dart';
+import 'package:hf_shop/utils/constants/images.dart';
+import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/popups/full_screen_loader.dart';
 import 'package:hf_shop/utils/popups/snackbar_helpers.dart';
 
@@ -76,12 +83,11 @@ class AddressController extends GetxController {
 
   Future<List<AddressModel>> getAllAddresses() async {
     try {
-      List<AddressModel> addresses =
-          await _repository.fetchUserAddresses();
-          selectedAddress.value = addresses.firstWhere(
-            (address) => address.selectedAddress,
-            orElse: () => AddressModel.empty(),
-          );
+      List<AddressModel> addresses = await _repository.fetchUserAddresses();
+      selectedAddress.value = addresses.firstWhere(
+        (address) => address.selectedAddress,
+        orElse: () => AddressModel.empty(),
+      );
 
       return addresses;
     } catch (e) {
@@ -100,7 +106,7 @@ class AddressController extends GetxController {
         content: UCircularLoader(),
       );
 
-      if(selectedAddress.value.id.isNotEmpty){
+      if (selectedAddress.value.id.isNotEmpty) {
         await _repository.updateSelectedField(selectedAddress.value.id, false);
       }
 
@@ -116,7 +122,47 @@ class AddressController extends GetxController {
     }
   }
 
+  Future<void> selectNewAddressBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(USizes.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              USectionHeading(title: 'Select Address', showActionButton: false),
+              SizedBox(height: USizes.spaceBtwItems),
+              FutureBuilder(
+                future: getAllAddresses(),
+                builder: (context, snapshot) {
+                  final widget = UCloudHelperFunctions.checkMultiRecordState(
+                    snapshot: snapshot,
+                  );
+                  if (widget != null) return widget;
 
+                  return ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(height: USizes.spaceBtwItems),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) => USingleAddress(
+                      address: snapshot.data![index],
+                      onTap: () {
+                        selectAddress(snapshot.data![index]);
+                        Get.back();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   void resetFormFields() {
     name.clear();

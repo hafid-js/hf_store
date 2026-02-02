@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hf_shop/common/widgets/custom_shapes/rounded_container.dart';
+import 'package:hf_shop/common/widgets/loaders/animation_loader.dart';
+import 'package:hf_shop/features/shop/controllers/order/order_controller.dart';
+import 'package:hf_shop/features/shop/models/order_model.dart';
+import 'package:hf_shop/navigation_menu.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
+import 'package:hf_shop/utils/constants/helpers/cloud_helper_functions.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
+import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -11,10 +18,19 @@ class UOrdersListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
-    return ListView.separated(
+    final controller = Get.put(OrderController());
+    return FutureBuilder(future: controller.fetchUserOrders(), builder: (context, snapshot) {
+
+      final nothingFound = UAnimationLoader(text: 'No order yet!', showActionButton: true, actionText: "Let's fill it", animation: UImages.pencilAnimation, onActionPressed: () => Get.offAll(() => NavigationMenu()),);
+      final widget = UCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, nothingFound: nothingFound);
+      if(widget != null) return widget;
+
+      List<OrderModel> orders = snapshot.data!;
+      return  ListView.separated(
       separatorBuilder: (context, index) => SizedBox(height: USizes.spaceBtwItems,),
-      itemCount: 10,
+      itemCount: orders.length,
       itemBuilder: (context, index) {
+        OrderModel order = orders[index];
       return URoundedContainer(
       showBorder: true,
       backgroundColor: dark ? UColors.dark : UColors.light,
@@ -32,14 +48,14 @@ class UOrdersListItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Processing',
+                      order.orderStatusText,
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
                         color: UColors.primary,
                         fontWeightDelta: 1,
                       ),
                     ),
                     Text(
-                      '01 Jan 2025',
+                      order.formattedOrderDate,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ],
@@ -72,7 +88,7 @@ class UOrdersListItems extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                           Text(
-                            '#3025804',
+                            order.id,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
@@ -97,7 +113,7 @@ class UOrdersListItems extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                           Text(
-                            '31 Des 2025',
+                            order.formattedDeliveryDate,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
@@ -112,5 +128,6 @@ class UOrdersListItems extends StatelessWidget {
       ),
     );
     }) ;
+    });
   }
 }
