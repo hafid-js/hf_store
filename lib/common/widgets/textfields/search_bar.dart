@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/shadow.dart';
+import 'package:hf_shop/features/shop/screens/search_store/search_store.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
@@ -19,7 +22,9 @@ class USearchBar extends StatelessWidget {
       bottom: 0,
       right: USizes.spaceBtwSections,
       left: USizes.spaceBtwSections,
-      child: Container(
+      child: GestureDetector(
+        onTap: () => Get.to(() => SearchStoreScreen()),
+        child: Container(
         height: USizes.searchBarHeight,
         padding: EdgeInsets.symmetric(horizontal: USizes.md),
         decoration: BoxDecoration(
@@ -38,6 +43,7 @@ class USearchBar extends StatelessWidget {
           ],
         ),
       ),
+      )
     );
   }
 }

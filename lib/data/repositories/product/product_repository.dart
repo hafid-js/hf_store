@@ -107,6 +107,30 @@ class ProductRepository extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> fetchAllProducts() async {
+    try {
+      final query = await _db.collection(UKeys.productsCollection).get();
+
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
+            .toList();
+        return products;
+      }
+      return [];
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
   Future<List<ProductModel>> fetchFeaturedProducts() async {
     try {
       final query = await _db
@@ -258,7 +282,7 @@ class ProductRepository extends GetxController {
           .map((doc) => ProductModel.fromSnapshot(doc))
           .toList();
 
-          return products;
+      return products;
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -272,12 +296,13 @@ class ProductRepository extends GetxController {
     }
   }
 
-
-  Future<List<ProductModel>> getFavouritesProducts(List<String> productIds) async {
+  Future<List<ProductModel>> getFavouritesProducts(
+    List<String> productIds,
+  ) async {
     try {
-       if (productIds.isEmpty) {
-      return [];
-    }
+      if (productIds.isEmpty) {
+        return [];
+      }
       final query = await _db
           .collection(UKeys.productsCollection)
           .where(FieldPath.documentId, whereIn: productIds)

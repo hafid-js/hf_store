@@ -18,6 +18,16 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
+  Future<List<ProductModel>> getAllProducts() async {
+    try {
+      List<ProductModel> products = await _repository.fetchAllProducts();
+      return products;
+    } catch(e) {
+      USnackBarHelpers.errorSnackBar(title: 'Errors', message: e.toString());
+      return [];
+    }
+  }
+
   Future<void> getFeaturedProduct() async {
     try {
       isLoading.value = true;
