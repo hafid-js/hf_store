@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/data/repositories/authentication_repository.dart';
 import 'package:hf_shop/features/shop/controllers/product/variation_controller.dart';
 import 'package:hf_shop/features/shop/models/cart_item_model.dart';
-import 'package:hf_shop/features/shop/models/payment_method_model.dart';
 import 'package:hf_shop/features/shop/models/product_model.dart';
 import 'package:hf_shop/features/shop/models/product_variation_model.dart';
-import 'package:hf_shop/features/shop/screens/checkout/widgets/payment_tile.dart';
 import 'package:hf_shop/utils/constants/enums.dart';
 import 'package:hf_shop/utils/constants/keys.dart';
-import 'package:hf_shop/utils/constants/sizes.dart';
 import 'package:hf_shop/utils/popups/snackbar_helpers.dart';
 
 class CartController extends GetxController {

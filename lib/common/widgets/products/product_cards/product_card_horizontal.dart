@@ -12,7 +12,6 @@ import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
 import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
-import 'package:iconsax/iconsax.dart';
 
 class UProductCardHorizontal extends StatelessWidget {
   const UProductCardHorizontal({super.key, required this.product});

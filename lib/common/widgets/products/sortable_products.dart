@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
 import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:hf_shop/features/shop/controllers/product/all_product_controller.dart';

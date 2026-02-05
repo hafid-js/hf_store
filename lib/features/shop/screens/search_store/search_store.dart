@@ -3,7 +3,6 @@ import 'package:get/state_manager.dart';
 import 'package:hf_shop/common/style/padding.dart';
 import 'package:hf_shop/common/widgets/appbar/appbar.dart';
 import 'package:hf_shop/common/widgets/layouts/grid_layout.dart';
-import 'package:hf_shop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:hf_shop/features/shop/controllers/product/product_controller.dart';
 import 'package:hf_shop/features/shop/screens/search_store/widgets/search_store_brands.dart';
 import 'package:hf_shop/features/shop/screens/search_store/widgets/search_store_categories.dart';
@@ -74,7 +73,7 @@ class SearchStoreScreen extends StatelessWidget {
                       itemCount: filteredProducts.length,
                       itemBuilder: (context, index) {
                         final product = filteredProducts[index];
-                        return UProductCardVertical(product: product);
+                        return Text(product.title);
                       },
                     );
                   },

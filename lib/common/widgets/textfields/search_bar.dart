@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:hf_shop/common/style/shadow.dart';
 import 'package:hf_shop/features/shop/screens/search_store/search_store.dart';
 import 'package:hf_shop/utils/constants/colors.dart';

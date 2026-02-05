@@ -15,7 +15,7 @@ class UBillingPaymentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final dark = UHelperFunctions.isDarkMode(context);
-    final controller = Get.put(CheckoutController());
+    final controller = CheckoutController.instance;
     return Column(
       children: [
         USectionHeading(title: 'Payment Method', buttonTitle: "Change", onPressed: () => controller.selectPaymentMethod(context),),

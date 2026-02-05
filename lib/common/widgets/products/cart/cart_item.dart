@@ -5,7 +5,6 @@ import 'package:hf_shop/common/widgets/texts/product_title_text.dart';
 import 'package:hf_shop/features/shop/models/cart_item_model.dart';
 import 'package:hf_shop/utils/constants/colors.dart';
 import 'package:hf_shop/utils/constants/helpers/helper_functions.dart';
-import 'package:hf_shop/utils/constants/images.dart';
 import 'package:hf_shop/utils/constants/sizes.dart';
 
 class UCartItem extends StatelessWidget {

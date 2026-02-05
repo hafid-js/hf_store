@@ -14,7 +14,7 @@ class UBindings extends Bindings {
     Get.put(HomeController(), permanent: true);
     Get.put(UserController(), permanent: true);
     Get.put(VariationController(), permanent: true);
-    Get.put(CheckoutController(), permanent: true);
+    // Get.put(CheckoutController(), permanent: true);
     Get.put(AddressController(), permanent: true);
   }
 }
