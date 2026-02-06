@@ -8,6 +8,7 @@ import 'package:hf_shop/common/widgets/loaders/screen_partial_loading.dart';
 import 'package:hf_shop/common/widgets/textfields/promo_code.dart';
 import 'package:hf_shop/features/shop/controllers/cart/cart_controller.dart';
 import 'package:hf_shop/features/shop/controllers/checkout/checkout_controller.dart';
+import 'package:hf_shop/features/shop/controllers/promo_code/promo_code_controller.dart';
 import 'package:hf_shop/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:hf_shop/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:hf_shop/features/shop/screens/checkout/widgets/billing_amount_section.dart';
@@ -29,6 +30,7 @@ class CheckoutScreen extends StatelessWidget {
       'Indonesia',
     );
     final checkoutController = Get.put(CheckoutController());
+    final promoCodeController = Get.put(PromoCodeController());
 
     return Obx(
       () => UPartialScreenLoading(
@@ -71,7 +73,12 @@ class CheckoutScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Padding(
+          bottomNavigationBar: Obx(() {
+
+            final promoCode = promoCodeController.appliedPromoCode.value;
+            totalPrice = promoCodeController.calculatePriceAfterDiscount(promoCode, totalPrice);
+
+            return Padding(
             padding: const EdgeInsets.all(USizes.defaultSpace),
             child: UElevatedButton(
               onPressed: subTotal > 0
@@ -80,9 +87,10 @@ class CheckoutScreen extends StatelessWidget {
                       title: 'Empty Cart',
                       message: 'Add item in the cart',
                     ),
-              child: Text('Checkout ${UTexts.currency}$totalPrice'),
+              child: Text('Checkout ${UTexts.currency}${totalPrice.toStringAsFixed(2)}'),
             ),
-          ),
+          );
+          })
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hf_shop/common/widgets/texts/section_heading.dart';
 import 'package:hf_shop/data/services/stripe_services.dart';
 import 'package:hf_shop/features/shop/controllers/order/order_controller.dart';
+import 'package:hf_shop/features/shop/controllers/promo_code/promo_code_controller.dart';
 import 'package:hf_shop/features/shop/models/payment_method_model.dart';
 import 'package:hf_shop/features/shop/screens/checkout/widgets/payment_tile.dart';
 import 'package:hf_shop/utils/constants/enums.dart';
@@ -101,9 +102,15 @@ class CheckoutController extends GetxController {
       isPaymentProcessing.value = false;
 
       await _orderController.processOrder(totalAmount);
+
+      await PromoCodeController.instance.decreaseNoOfPomoCodes();
+
+      await PromoCodeController.instance.addUserToPromoCode();
+
     } catch (e) {
       isPaymentProcessing.value = false;
       USnackBarHelpers.errorSnackBar(title: 'Error!', message: e.toString());
     }
   }
+  
 }
